@@ -1,0 +1,17 @@
+.linha {
+  display: flex;
+  padding: 5px;
+  margin: 3px;
+  
+}
+
+.caixa{
+    flex: 33.33%;
+    margin: 5px;
+}
+
+
+img {
+  width:100%;
+  height:auto; 
+}
