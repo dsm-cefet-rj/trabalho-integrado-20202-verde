@@ -1,0 +1,3 @@
+Riscos
+
+A rede social tem por finalidade atrair profissionais que queiram expor suas capacidades e conhecimentos, mas por não ter tantos atrativos para visitantes que não tenham relação com a finalidade do site, ou seja, não pensam em contratar, ou expor seus trabalhos, pode falhar na captação de usuários. Além disso, há concorrentes fortes no mercado, que mesmo não tendo o mesmo propósito, cumprem a proposta da aplicação, como o Linkedin, e em casos mais específicos, outras redes sociais como Instagram e Facebook.
