@@ -1,0 +1,75 @@
+.App {
+  text-align: center;
+}
+.botao
+{
+   margin-left: 15px;
+  display:inline-block;
+  vertical-align:center;  
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+img {
+  width:  150%;
+  height: 150%;
+  border: 2px solid black;
+}
+mark {
+  background-color: #E33E3E;
+  color: black;
+}
+.corpo {
+   text-align:center;
+}
+.linha {
+  display: flex;
+}
+.header {
+   color: darkred;
+   font-size: 230%;
+   text-align:center;
+}
+
+.coluna {
+  flex: 33.33%;
+  padding: 5px;
+}
+p
+{
+  width : 100%;
+  padding : 3%;
+  font-family: Arial;
+  font-size: 18px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
