@@ -11,10 +11,8 @@ function Titulo(props) {
         <div class = "col-xs-12">
       <h1 > {props.tittle} 
       <small >ㅤFeito por :ㅤ
-      <Router>
               <Link to ="/User"> 
              {props.InfoProjeto.Nome}</Link>
-        </Router>
       </small>
       </h1>
         </div>
