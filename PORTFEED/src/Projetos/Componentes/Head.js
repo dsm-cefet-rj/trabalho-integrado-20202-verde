@@ -1,16 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom"
 
 //Projeto para o cabeçalho e barra de pesquisa
-class Head extends React.Component {
-   render() {
+function Head (){
      return(   
     <div className= "page-header">
       <form className="form-horizontal">
         <div className="container">
           <div className = "form-group row" >
-              <a href= "https://Feed-ReactEduMoura-EduMoura.webuono.repl.co" target="_blank" rel ="noopener noreferrer"> 
-              <label className = "col-xs-6 header"> PORT-FEED</label></a>
+              <Router>
+              <Link to ="/Feed"> 
+              <label className = "col-xs-6 header"> PORT-FEED</label></Link>
+              </Router>
               <div className = "col-xs-6">
               <input type="text" className="form-control " placeholder="Pesquisa"/>
           </div>
@@ -18,12 +22,7 @@ class Head extends React.Component {
         </div>
       </form>
     </div>
-   );
-  }
+   )
 }
-ReactDOM.render(
-  <Head />,
-  document.getElementById('root')
-);
 
 export default Head;
