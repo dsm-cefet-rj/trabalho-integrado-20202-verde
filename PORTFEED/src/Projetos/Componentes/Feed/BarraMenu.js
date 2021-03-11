@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '/home/runner/PORTFEED/src/App.css';
+import '/Feed.css';
 
 const categories = ['Code', 'Games', 'Desing', 'Fotografia'];
 
-
-
-
-//Projeto para a barra de guia da tela de feed 
 class BarraMenu extends React.Component {
     
 handleClickTags(){
@@ -16,6 +13,7 @@ handleClickTags(){
 
   render() {
     return (
+      <div className="borda">
       <div className="barra">
       <button className="button, col-xs-4" onClick={() => alert('Novo')}>
         Novo
@@ -25,7 +23,7 @@ handleClickTags(){
       </button>
       <button className="button, col-xs-4 " data-toggle="dropdown"  onClick={() => this.handleClickTags()}>
         Tags <span class="caret"></span></button>
-      
+      </div>
       </div>
     );
   }

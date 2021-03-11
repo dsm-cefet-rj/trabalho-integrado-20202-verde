@@ -6,10 +6,12 @@
 .lin {
   display: flex;
   padding: 5px;
-  margin: 15px;
+  margin: 3px;
   
 }
-
+.borda{
+  margin: 10px;
+}
 img {
   width:100%;
   height:auto; 
