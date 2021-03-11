@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '/home/runner/PORTFEED/src/App.css';
 
-const categories = ['World', 'Business', 'Tech', 'Sport'];
+const categories = ['Code', 'Games', 'Desing', 'Fotografia'];
 
 
 
