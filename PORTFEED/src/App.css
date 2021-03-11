@@ -7,13 +7,60 @@
   display:inline-block;
   vertical-align:center;  
 }
+.fotoprojeto{
+  display:inline-block;
+}
+.button{
+  background-color: lightgray;
+  border: none;
+  color: darkred;
+  padding: 8px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 13px;
+  /*margin: 4px 2px;*/
+  cursor: pointer;
+}
+.barra {
+  background-color: lightgray;
+  margin: 1px;
+  text-align: center;
+}
+.center {
+  margin: auto;
+  width: 90%;
+  border: 3px solid black;
+  padding: 10px;
+}
+h1
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+h3
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+.textousuario{
+align-self:left;
+display:inline-block;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-img {
+.imgvisualiza {
   width:  150%;
   height: 150%;
+  border: 2px solid black;
+}
+.img2 {
+  width:200px;
+  height:200px;
   border: 2px solid black;
 }
 mark {
