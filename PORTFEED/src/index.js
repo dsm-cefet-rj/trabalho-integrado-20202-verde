@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import Visualizacao_Projeto from './Visualizacao_Projeto';
+import Visualizacao_Projeto from './Visualizacao_Projeto.js';
 import Feed from './Feed';
 import Perfil from './Perfil';
 import {
   BrowserRouter as Router,
-  Switch,
   Route
 } from "react-router-dom"
 

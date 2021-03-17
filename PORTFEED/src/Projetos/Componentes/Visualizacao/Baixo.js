@@ -1,7 +1,16 @@
-import React from 'react';
+import React , { useState } from 'react';
+
 
 //Projeto para o cabeçalho e barra de pesquisa
 function Baixo(props){
+
+  const [curt,setCurt] = useState(()=> {return 0})
+
+  function Curte()
+  {
+    setCurt(priCurt =>  priCurt + 1)
+  }
+  
      return(   
     <div>
     <div>
@@ -13,15 +22,16 @@ function Baixo(props){
     </div>
 
    <div class = "linha">
-      <input class = "botao" type="image" id = "curtida" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX_LER1e7ghQtxhmNIAutyoeykmLvl_JPbqA&usqp=CAU" name="submit" width="60" height="60"  alt="submit"/>
-   
+      <input class = "botao" type="image" id = "curtida" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX_LER1e7ghQtxhmNIAutyoeykmLvl_JPbqA&usqp=CAU" name="submit" width="60" height="60"  alt="submit" onClick={Curte}/>
+
  <p class = "col-xs-3"> Curtidas:</p> 
   
-  <p class = "col-xs-6" id = "num">3145692312751831</p> 
+  <p class = "col-xs-6" id = "num">{curt}</p> 
 
    </div>
    </div>
    );
+
 }
 
 
