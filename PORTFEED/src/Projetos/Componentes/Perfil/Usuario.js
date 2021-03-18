@@ -10,9 +10,11 @@ class Usuario extends React.Component {
        </div>
       <div id="textousuario">
         <div class = "col-xs-6">
-          <h1>Nome do Usu&aacute;rio</h1>
-         <div><h3>Bio:</h3></div>
-         <div><h3>&Aacute;reas de atua&ccedil;&atilde;o: Programa&ccedil;&atilde;o,<br /> Jogos, M&uacute;sica,<br /> Fotografia, Design</h3></div>
+          <h1> 
+             {descricao.nome}</h1>
+         <div><h3>Bio:{descricao.bio}</h3></div>
+         <div><h3> 
+             Areas de Atuacao:{descricao.areaAt}</h3></div>
          </div>
        </div>
        <br />
