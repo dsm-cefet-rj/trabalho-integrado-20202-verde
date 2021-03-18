@@ -14,7 +14,7 @@ const Usuario = ({nome}) => (
              {guarda.nome}</h1>
          <div><h3>Bio:{guarda.bio}</h3></div>
          <div><h3> 
-             Areas de Atuacao:{guarda.areaAt}</h3></div>
+              Áreas de Atuação:{guarda.areaAt}</h3></div>
          </div>
        </div>
        <br />
