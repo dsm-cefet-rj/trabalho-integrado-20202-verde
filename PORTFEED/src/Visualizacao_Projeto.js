@@ -2,9 +2,12 @@ import React from 'react';
 import './App.css';
 import Head from './Projetos/Componentes/Head.js';
 import Titulo from './Projetos/Componentes/Visualizacao/Titulo.js';
-import Descricao from './Projetos/Componentes/Descricao.js';
+import Descricao from './Projetos/Componentes/Visualizacao/Descricao.js';
 import Baixo from './Projetos/Componentes/Visualizacao/Baixo.js';
 import Images from './Projetos/Componentes/Visualizacao/Images.js';
+import {Provider} from "react-redux";
+import store from '/home/runner/PORTFEED/src/Projetos/Componentes/store/Guarda'
+
 
 const InfoProjeto = {
         Nome: 'Usuario',
@@ -15,14 +18,20 @@ const InfoProjeto = {
 
 function Visualizacao_Projeto() {
   return (
+    
+     
     <header> 
+    
+      
     <Head/>
+    <Provider store = {store}>
     <Titulo tittle = 'Projeto de Teste' InfoProjeto = {InfoProjeto}/>
-    <Descricao descricao = {InfoProjeto.Descricao}/>
+    <Descricao/>
     <Images/>
     <Baixo InfoProjeto = {InfoProjeto}/>
+    </Provider>
     </header>
-    
+      
   );
 }
 
