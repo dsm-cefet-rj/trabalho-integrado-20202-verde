@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import React, { useState, useEffect } from 'react';
 import '/home/runner/PORTFEED/src/App.css';
 import './Feed.css';
@@ -6,22 +5,23 @@ import './Feed.css';
 
 const tag = ['Todas' ,'Code' , 'Game', 'Tech', 'Design', 'Fotografia','Musica']
 
-
 export default function BarraMenu(){
+    const [position, setPosition] = useState(0);
+    const [tags, setTag] = useState('');
 
-  const [position, setPosition] = useState(0);
-  const [tags, setTag] = useState('');
+    const onPress = () => {    
+    const pos = position + 1 === tag.length 
+      ? 0 
+      : position + 1;
+    setPosition(pos);
+    }
 
-  const onPress = () => {    
-  const pos = position + 1 === tag.length 
-    ? 0 
-    : position + 1;
-  setPosition(pos);
-  }
+    useEffect(() => {
+    setTag(tag[position]);
+   }, [position]);
+  
+  
 
-  useEffect(() => {
-  setTag(tag[position]);
- }, [position]);
 
     return (
       <div className="borda">
@@ -33,10 +33,14 @@ export default function BarraMenu(){
         Favoritos
       </button>
       <button className="button, col-xs-4 " onClick={onPress}>
-        Tags <span > - {tags} </span></button>
+        Tags <span> - {tags} </span>
+      </button>
       </div>
       </div>
     );
+  
 }
+
+
 
 
