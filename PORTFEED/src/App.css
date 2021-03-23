@@ -1,6 +1,22 @@
 .App {
   text-align: center;
 }
+.txtarea{ 
+  width:  calc(100vw - 50px);      /* calc and viewport to the rescue */
+  height: 400px;
+  font-family: Arial;
+  font-size: 18px;
+}
+.txtbox{ 
+  width:  calc(100vw - 50px);      /* calc and viewport to the rescue */
+  font-family: Arial;
+}
+.divimagem{
+  width:  10%;
+  height: 10%;
+   margin-left: auto;
+  margin-right: auto;
+}
 .botao
 {
    margin-left: 15px;
@@ -120,3 +136,4 @@ p
     transform: rotate(360deg);
   }
 }
+

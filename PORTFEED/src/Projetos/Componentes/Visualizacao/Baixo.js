@@ -1,8 +1,9 @@
 import React , { useState } from 'react';
-
+import { connect } from 'react-redux';
+import {Link} from "react-router-dom"
 
 //Projeto para o cabeçalho e barra de pesquisa
-function Baixo(props){
+function Baixo({projetos}){
 
   const [curt,setCurt] = useState(()=> {return 0})
 
@@ -10,11 +11,20 @@ function Baixo(props){
   {
     setCurt(priCurt =>  priCurt + 1)
   }
-  
-     return(   
+  function edita()
+{
+     document.documentElement.scrollTop = 0
+}
+
+
+     return( <>
+    
     <div>
+    {projetos.map(descricao => 
+    (  
+      <div>
     <div>
-    <p class = "texto">Mais Informações: {props.InfoProjeto.Info}</p>
+    <p class = "texto">Mais Informações: {descricao.info}</p>
     </div>
     
    <div>
@@ -27,12 +37,20 @@ function Baixo(props){
  <p class = "col-xs-3"> Curtidas:</p> 
   
   <p class = "col-xs-6" id = "num">{curt}</p> 
-
+</div>
+ <div class = "col-xs-6">
+ <Link to ="/Edita">
+  <input type="submit" value="Editar" name = 'salva' Onclick = {edita()} />
+     
+     </Link>
+      </div>
    </div>
+    ))}
    </div>
+   </>
    );
 
 }
 
 
-export default Baixo;
+export default  connect(state => ({ projetos : state }))(Baixo);

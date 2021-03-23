@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
+import { updateProjeto } from '/home/runner/PORTFEED/src/Projetos/Componentes/AddProjeto/SliceProjeto.js'
 
-export default function InserirProjeto(props){
+
+  function InserirProjeto({projetos}){
 
     const [projeto, setProjeto] = useState({});
     const history = useHistory();
@@ -15,24 +17,70 @@ export default function InserirProjeto(props){
 
     function handleSubmit(e){
         e.preventDefault();
-        dispatch({type: 'salva', payload: projeto})
+        console.log(e.target.name);
+        dispatch(updateProjeto(projeto));
         history.push('/Projeto');
-
+        document.documentElement.scrollTop = 0; 
     }
-    return(<>
-            <h1>Novo Projeto</h1>
+
+    function cancela()
+    { 
+        history.push('/Projeto');
+        document.documentElement.scrollTop = 0; 
+    }
+
+    return(<div>
+            <h1>Editar Projeto</h1>
+            {projetos.map(descricao => 
+                  (
             <form onSubmit={handleSubmit}>
+            
+            <div class = "col-xs-12">
             <label for="username"> Nome do Projeto:
-                  <input type="text" id="name" name="projeto" placeholder="TESTE" value={projeto.projeto} onChange={handleInputChange}/>
+                  <br/>
+                  
+                  <input type="text" id="name" name="projeto" placeholder={descricao.projeto} value={projetos.projeto} onChange={handleInputChange}/>
+                  
             </label>
+            </div>
             <br/>
-            <label for="username">
-            Descrição do Projeto: 
-            <textarea id="name" name ='desc' value={projeto.desc} onChange={handleInputChange}/>/>
+            <br/> 
+            <div class = "col-xs-12">
+                <label for="username">
+                    Descrição do Projeto: 
+                    <br/>
+                    <textarea name ='desc' class= 'txtarea' placeholder={descricao.desc} value={projetos.desc} onChange={handleInputChange}/>
+                </label>
+            </div>
+            <br/>
+
+            <div >
+              <img  class="divimagem img-responsive"   src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Plus_font_awesome.svg/512px-Plus_font_awesome.svg.png" alt="Imagem"></img>
+            </div>
+            <br/>
+            <div class = "col-xs-12">
+            <label for="username"> Informações Extras:
+                  <br/>
+                  <input type="text" class= 'txtbox' id="name" name="info" placeholder={descricao.info} value={projetos.info} onChange={handleInputChange}/>
+                  
             </label>
+            </div>
             <br/>
-            <input type="submit" value="Salvar" />
+
+
+            <div >
+            <div class = "col-xs-6">
+            <input type="submit" value="Salvar" name = 'salva'/>
+            </div>
+            <div class = "col-xs-6">
+                <input type="submit" value="Cancelar" name = 'salva' onClick={cancela}/>
+             
+             </div>
+            </div>
             </form>
-          </>
+            ))}
+          </div>
 );
 }
+
+export default connect(state => ({ projetos : state }))(InserirProjeto)

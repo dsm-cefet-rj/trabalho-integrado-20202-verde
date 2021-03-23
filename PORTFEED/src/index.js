@@ -16,10 +16,13 @@ import {
 ReactDOM.render(
   <Router>
     <Route exact = {true} path ="/">
-        <EditarProjeto/>
+        <Visualizacao_Projeto/>
       </Route>
       <Route path ="/Projeto">
         <Visualizacao_Projeto/>
+      </Route>
+      <Route path ="/Edita">
+        <EditarProjeto/>
       </Route>
       <Route path ="/User">
         <Perfil/>

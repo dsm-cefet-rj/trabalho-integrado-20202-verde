@@ -6,7 +6,7 @@ import Descricao from './Projetos/Componentes/Visualizacao/Descricao.js';
 import Baixo from './Projetos/Componentes/Visualizacao/Baixo.js';
 import Images from './Projetos/Componentes/Visualizacao/Images.js';
 import {Provider} from "react-redux";
-import store from '/home/runner/PORTFEED/src/Projetos/Componentes/store/Guarda'
+import store from '/home/runner/PORTFEED/src/Projetos/Componentes/store/GuardaProjeto.js'
 
 
 const InfoProjeto = {
