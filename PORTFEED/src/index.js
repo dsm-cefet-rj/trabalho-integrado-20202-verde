@@ -5,6 +5,8 @@ import * as serviceWorker from './serviceWorker';
 import Visualizacao_Projeto from './Visualizacao_Projeto.js';
 import Feed from './Feed';
 import Perfil from './Perfil';
+import EditarProjeto from './EditarProjeto.js';
+
 import {
   BrowserRouter as Router,
   Route
@@ -14,7 +16,7 @@ import {
 ReactDOM.render(
   <Router>
     <Route exact = {true} path ="/">
-        <Visualizacao_Projeto/>
+        <EditarProjeto/>
       </Route>
       <Route path ="/Projeto">
         <Visualizacao_Projeto/>

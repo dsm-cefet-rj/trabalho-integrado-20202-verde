@@ -25,7 +25,7 @@ function Visualizacao_Projeto() {
       
     <Head/>
     <Provider store = {store}>
-    <Titulo tittle = 'Projeto de Teste' InfoProjeto = {InfoProjeto}/>
+    <Titulo />
     <Descricao/>
     <Images/>
     <Baixo InfoProjeto = {InfoProjeto}/>

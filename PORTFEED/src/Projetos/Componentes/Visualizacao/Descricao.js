@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Descricao = ({desc}) => (
+const Descricao = ({projetos}) => (
   <aside>
-  {desc.map(descricao => 
+  {projetos.map(descricao => 
     (<p>{descricao.desc}</p>)
   )
         
@@ -11,4 +11,4 @@ const Descricao = ({desc}) => (
 </aside>
 );
 
-export default connect(state => ({ desc : state }))(Descricao);
+export default connect(state => ({ projetos : state }))(Descricao);

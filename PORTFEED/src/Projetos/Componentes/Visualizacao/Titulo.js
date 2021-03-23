@@ -4,17 +4,17 @@ import {
 } from "react-router-dom"
 import { connect } from 'react-redux';
 
-const Titulo = ({desc}) => (
+const Titulo = ({projetos}) => (
 <aside>
-  {desc.map(descricao => 
+  {projetos.map(descricao => 
     (
          <div class= "container">
       <div class = "row" >
         <div class = "col-xs-12">
       <h1 > {descricao.projeto} 
-      <small >ㅤFeito por :ㅤ
+      <small >ㅤ Feito por :ㅤ  
               <Link to ="/User"> 
-             {descricao.nome}</Link>
+             Usuário</Link>
       </small>
       </h1>
         </div>
@@ -26,4 +26,4 @@ const Titulo = ({desc}) => (
 </aside>
 );
 
-export default connect(state => ({ desc : state }))(Titulo);
+export default connect(state => ({ projetos : state }))(Titulo);
