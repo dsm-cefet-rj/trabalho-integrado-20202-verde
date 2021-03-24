@@ -6,7 +6,7 @@ import './imgvisu.css';
 class Images extends React.Component {
    render() {
      return(   
-    <div>
+    <div class = "col-xs-12">
     <div class="linha ">
           <div class="coluna">
             <img class ="img-responsive"    src="https://incuca.net/wp-content/uploads/2018/05/gestao-de-projetos.jpg" alt="Imagem"></img>

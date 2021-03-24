@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, connect } from 'react-redux';
-import { updateProjeto } from '/home/runner/PORTFEED/src/Projetos/Componentes/AddProjeto/SliceProjeto.js'
+import { updateProjeto } from './SliceProjeto.js'
 
 
   function InserirProjeto({projetos}){

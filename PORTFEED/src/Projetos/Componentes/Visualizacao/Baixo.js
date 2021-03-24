@@ -23,8 +23,8 @@ function Baixo({projetos}){
     {projetos.map(descricao => 
     (  
       <div>
-    <div>
-    <p class = "texto">Mais Informações: {descricao.info}</p>
+    <div class = "col-xs-12">
+    <p class = "texto text-justify">Mais Informações: {descricao.info}</p>
     </div>
     
    <div>

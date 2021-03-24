@@ -5,7 +5,7 @@ import Usuario from './Projetos/Componentes/Perfil/Usuario.js';
 import Projetos from './Projetos/Componentes/Perfil/Projetos.js';
 import BarraPerfil from './Projetos/Componentes/Perfil/BarraPerfil.js';
 import {Provider} from "react-redux";
-import store from '/home/runner/PORTFEED/src/Projetos/Componentes/store/Guarda'
+import store from './Projetos/Componentes/store/GuardaPerfil.js'
 
 function Perfil() {
   return (

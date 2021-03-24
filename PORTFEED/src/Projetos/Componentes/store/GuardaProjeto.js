@@ -1,5 +1,5 @@
 import {createStore} from "redux";
-import slice from '/home/runner/PORTFEED/src/Projetos/Componentes/AddProjeto/SliceProjeto.js'
+import slice from '../AddProjeto/SliceProjeto.js'
 
 
 const store = createStore(slice);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '/home/runner/PORTFEED/src/App.css';
 
 //Projeto para a barra de guia da tela de perfil
 

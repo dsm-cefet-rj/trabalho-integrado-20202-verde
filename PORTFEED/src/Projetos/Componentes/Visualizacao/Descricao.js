@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 const Descricao = ({projetos}) => (
   <aside>
   {projetos.map(descricao => 
-    (<p>{descricao.desc}</p>)
+    (
+    <p class = "col-xs-12 text-justify"> {descricao.desc}</p>)
   )
         
   }
