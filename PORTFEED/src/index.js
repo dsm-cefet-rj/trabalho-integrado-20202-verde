@@ -6,6 +6,7 @@ import Visualizacao_Projeto from './Visualizacao_Projeto.js';
 import Feed from './Feed';
 import Perfil from './Perfil';
 import EditarProjeto from './EditarProjeto.js';
+import AddProjeto from './AdicionarProjeto.js';
 
 import {
   BrowserRouter as Router,
@@ -27,7 +28,12 @@ ReactDOM.render(
       <Route path ="/User">
         <Perfil/>
       </Route>
-      <Route path ="/Feed"><Feed/></Route>
+      <Route path ="/Adiciona">
+        <AddProjeto/>
+      </Route>
+      <Route path ="/Feed">
+        <Feed/>
+      </Route>
     </Router>,document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

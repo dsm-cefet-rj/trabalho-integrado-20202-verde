@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, connect, useSelector } from 'react-redux';
-import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
-import {esquemaProjeto} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Projetos/esquemaProjeto.js';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from "react-hook-form";
+import { addProjetoServer, selectAllProjetos} from './SliceProjeto.js'
+
     
 
-  function InserirProjeto(props){
+  function AdicionarProjeto(props){
 
 
     const projetos = useSelector(selectAllProjetos)
@@ -15,27 +13,24 @@ import { useForm } from "react-hook-form";
     const history = useHistory();
     const dispatch = useDispatch()
 
-    let { id } = useParams();
-    id = parseInt(id);
-
     const projetoFound = useSelector(selectAllProjetos)
 
-    const { register, handleSubmit, errors } = useForm({
-        resolver: yupResolver(esquemaProjeto)
-    });
-
-    const [projetoOnLoad] = useState(
-        id ? projetoFound ?? esquemaProjeto.cast({}): esquemaProjeto.cast({}));
+    const [projeto, setProjeto] = useState(
+              projetoFound ?? {});
 
     const [actionType, ] = useState( 
          projetoFound ? 'projetos/updateProjeto'
             : 'projetos/addProjeto'
             );
 
-    
-    
-    function onSubmit(projeto){
-        dispatch(updateProjetoServer(projeto));
+    function handleInputChange(e) {
+        setProjeto( {...projeto, [e.target.name]: e.target.value} );
+    }
+
+    function handleSubmit(e){
+        setProjeto(projeto.id = projetos.id)
+        e.preventDefault();
+        dispatch(addProjetoServer(projeto));
         history.push('/Projeto');
         document.documentElement.scrollTop = 0; 
     }
@@ -47,15 +42,16 @@ import { useForm } from "react-hook-form";
     }
 
     return(<div>
-            <h1>Editar Projeto</h1>
+            <h1>Novo Projeto</h1>
             
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit}>
             
             <div class = "col-xs-12">
             <label for="username"> Nome do Projeto:
-            <span> {errors.nome?.message}</span>
                   <br/>
-                  <input type="text" id="name" name="nome" placeholder={props.projetos.nome} defaultValue={projetoOnLoad.nome} ref ={register}/>
+                  
+                  <input type="text" id="name" name="nome" placeholder={props.projetos.nome} value={projeto.nome} onChange={handleInputChange}/>
+                  
             </label>
             </div>
             <br/>
@@ -63,9 +59,8 @@ import { useForm } from "react-hook-form";
             <div class = "col-xs-12">
                 <label for="username">
                     Descrição do Projeto: 
-                    <span> {errors.desc?.message}</span>
                     <br/>
-                    <textarea name ='desc' class= 'txtarea' placeholder={props.projetos.desc} defaultValue={projetoOnLoad.desc} ref ={register}/>
+                    <textarea name ='desc' class= 'txtarea' placeholder={props.projetos.desc} value={projeto.desc} onChange={handleInputChange}/>
                 </label>
             </div>
             <br/>
@@ -76,9 +71,8 @@ import { useForm } from "react-hook-form";
             <br/>
             <div class = "col-xs-12">
             <label for="username"> Informações Extras:
-            <span> {errors.info?.message}</span>
                   <br/>
-                  <input type="text" class= 'txtbox' id="name" name="info" placeholder={props.projetos.info} defaultValue={projetoOnLoad.info} ref ={register}/>
+                  <input type="text" class= 'txtbox' id="name" name="info" placeholder={props.projetos.info} value={projeto.info} onChange={handleInputChange}/>
                   
             </label>
             </div>
@@ -99,4 +93,4 @@ import { useForm } from "react-hook-form";
 );
 }
 
-export default connect(state => ({ projetos : state }))(InserirProjeto)
+export default connect(state => ({ projetos : state }))(AdicionarProjeto)
