@@ -18,7 +18,9 @@ export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer
     return await httpPut(`http://localhost:3004/projetos/0`, projeto);
 });
 
-
+export const addProjetoServer = createAsyncThunk('projetos/addProjetoServer', async (projeto, {getState}) => {
+    return await httpPost(`http://localhost:3004/projetos/0`, projeto)
+});
 export const sliceProjeto = createSlice({
     name: 'projetos',
     initialState: salvaProjetos,
@@ -28,6 +30,8 @@ export const sliceProjeto = createSlice({
         [fetchProjetos.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
         [updateProjetoServer.pending]: (state, action) => {state.status = 'loading'},
         [updateProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetosAdapter.upsertOne(state, action.payload);},
+        [addProjetoServer.pending]: (state, action) => {state.status = 'loading'},
+        [addProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetosAdapter.addOne(state, action.payload);},
     }
 })
 
