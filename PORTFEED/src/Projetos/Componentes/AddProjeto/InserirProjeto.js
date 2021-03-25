@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
-
+import {esquemaProjeto} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Projetos/esquemaProjeto.js';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from "react-hook-form";
     
 
   function InserirProjeto(props){
@@ -13,23 +15,26 @@ import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
     const history = useHistory();
     const dispatch = useDispatch()
 
+    let { id } = useParams();
+    id = parseInt(id);
+
     const projetoFound = useSelector(selectAllProjetos)
 
-    const [projeto, setProjeto] = useState(
-              projetoFound ?? {});
+    const { register, handleSubmit, errors } = useForm({
+        resolver: yupResolver(esquemaProjeto)
+    });
+
+    const [projetoOnLoad] = useState(
+        id ? projetoFound ?? esquemaProjeto.cast({}): esquemaProjeto.cast({}));
 
     const [actionType, ] = useState( 
          projetoFound ? 'projetos/updateProjeto'
             : 'projetos/addProjeto'
             );
 
-    function handleInputChange(e) {
-        setProjeto( {...projeto, [e.target.name]: e.target.value} );
-    }
-
-    function handleSubmit(e){
-        setProjeto(projeto.id = projetos.id)
-        e.preventDefault();
+    
+    
+    function onSubmit(projeto){
         dispatch(updateProjetoServer(projeto));
         history.push('/Projeto');
         document.documentElement.scrollTop = 0; 
@@ -44,14 +49,13 @@ import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
     return(<div>
             <h1>Editar Projeto</h1>
             
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
             
             <div class = "col-xs-12">
             <label for="username"> Nome do Projeto:
+            <span> {errors.nome?.message}</span>
                   <br/>
-                  
-                  <input type="text" id="name" name="nome" placeholder={props.projetos.nome} value={projeto.nome} onChange={handleInputChange}/>
-                  
+                  <input type="text" id="name" name="nome" placeholder={props.projetos.nome} defaultValue={projetoOnLoad.nome} ref ={register}/>
             </label>
             </div>
             <br/>
@@ -59,8 +63,9 @@ import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
             <div class = "col-xs-12">
                 <label for="username">
                     Descrição do Projeto: 
+                    <span> {errors.desc?.message}</span>
                     <br/>
-                    <textarea name ='desc' class= 'txtarea' placeholder={props.projetos.desc} value={projeto.desc} onChange={handleInputChange}/>
+                    <textarea name ='desc' class= 'txtarea' placeholder={props.projetos.desc} defaultValue={projetoOnLoad.desc} ref ={register}/>
                 </label>
             </div>
             <br/>
@@ -71,8 +76,9 @@ import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
             <br/>
             <div class = "col-xs-12">
             <label for="username"> Informações Extras:
+            <span> {errors.info?.message}</span>
                   <br/>
-                  <input type="text" class= 'txtbox' id="name" name="info" placeholder={props.projetos.info} value={projeto.info} onChange={handleInputChange}/>
+                  <input type="text" class= 'txtbox' id="name" name="info" placeholder={props.projetos.info} defaultValue={projetoOnLoad.info} ref ={register}/>
                   
             </label>
             </div>
