@@ -1,24 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
-import { useDispatch, connect } from 'react-redux';
-import { updateProjeto } from './SliceProjeto.js'
+import { useDispatch, connect, useSelector } from 'react-redux';
+import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
+
+    
+
+  function InserirProjeto(props){
 
 
-  function InserirProjeto({projetos}){
+    const projetos = useSelector(selectAllProjetos)
 
-    const [projeto, setProjeto] = useState({});
     const history = useHistory();
-
     const dispatch = useDispatch()
+
+    const projetoFound = useSelector(selectAllProjetos)
+
+    const [projeto, setProjeto] = useState(
+              projetoFound ?? {});
+
+    const [actionType, ] = useState( 
+         projetoFound ? 'projetos/updateProjeto'
+            : 'projetos/addProjeto'
+            );
 
     function handleInputChange(e) {
         setProjeto( {...projeto, [e.target.name]: e.target.value} );
     }
 
     function handleSubmit(e){
+        setProjeto(projeto.id = projetos.id)
         e.preventDefault();
-        console.log(e.target.name);
-        dispatch(updateProjeto(projeto));
+        dispatch(updateProjetoServer(projeto));
         history.push('/Projeto');
         document.documentElement.scrollTop = 0; 
     }
@@ -31,15 +43,14 @@ import { updateProjeto } from './SliceProjeto.js'
 
     return(<div>
             <h1>Editar Projeto</h1>
-            {projetos.map(descricao => 
-                  (
+            
             <form onSubmit={handleSubmit}>
             
             <div class = "col-xs-12">
             <label for="username"> Nome do Projeto:
                   <br/>
                   
-                  <input type="text" id="name" name="projeto" placeholder={descricao.projeto} value={projetos.projeto} onChange={handleInputChange}/>
+                  <input type="text" id="name" name="nome" placeholder={props.projetos.nome} value={projeto.nome} onChange={handleInputChange}/>
                   
             </label>
             </div>
@@ -49,7 +60,7 @@ import { updateProjeto } from './SliceProjeto.js'
                 <label for="username">
                     Descrição do Projeto: 
                     <br/>
-                    <textarea name ='desc' class= 'txtarea' placeholder={descricao.desc} value={projetos.desc} onChange={handleInputChange}/>
+                    <textarea name ='desc' class= 'txtarea' placeholder={props.projetos.desc} value={projeto.desc} onChange={handleInputChange}/>
                 </label>
             </div>
             <br/>
@@ -61,7 +72,7 @@ import { updateProjeto } from './SliceProjeto.js'
             <div class = "col-xs-12">
             <label for="username"> Informações Extras:
                   <br/>
-                  <input type="text" class= 'txtbox' id="name" name="info" placeholder={descricao.info} value={projetos.info} onChange={handleInputChange}/>
+                  <input type="text" class= 'txtbox' id="name" name="info" placeholder={props.projetos.info} value={projeto.info} onChange={handleInputChange}/>
                   
             </label>
             </div>
@@ -78,7 +89,6 @@ import { updateProjeto } from './SliceProjeto.js'
              </div>
             </div>
             </form>
-            ))}
           </div>
 );
 }

@@ -1,15 +1,50 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch } from 'react-redux';
+import {fetchProjetos, selectAllProjetos} from '../AddProjeto/SliceProjeto.js'
 
-const Descricao = ({projetos}) => (
-  <aside>
-  {projetos.map(descricao => 
-    (
-    <p class = "col-xs-12 text-justify"> {descricao.desc}</p>)
-  )
-        
+function Descricao (props)
+{
+  const projetos = useSelector(selectAllProjetos)
+
+  const status = useSelector(state => state.projetos.status);
+  const error = useSelector(state => state.projetos.error);
+  
+    
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    if (status === 'not_loaded' ) {
+        dispatch(fetchProjetos())
+    }else if(status === 'failed'){
+        setTimeout(()=>dispatch(fetchProjetos()), 5000);
+    }
+  }, [status, dispatch])
+  
+  
+  
+  let descProjeto = '';
+  if(status === 'loaded' || status === 'saved' || status === 'deleted'){
+    descProjeto = <Desc projetos={projetos}/>;
+  }else if(status === 'loading'){
+    descProjeto = <div>Carregando Descrição...</div>;
+  }else if(status === 'failed'){
+    descProjeto = <div>Error: {error}</div>;
   }
+  
+    return (<>
+              {descProjeto}
+      </>
+    )
+  
+    
+  }
+
+
+const Desc = (props) => (
+  <aside>
+  
+    <p class = "col-xs-12 text-justify"> {props.projetos[0].desc}</p>
 </aside>
 );
 
-export default connect(state => ({ projetos : state }))(Descricao);
+export default (Descricao);

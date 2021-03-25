@@ -1,6 +1,7 @@
-import {createStore} from "redux";
+import {configureStore} from "@reduxjs/toolkit";
 import slice from '../AddProjeto/SliceProjeto.js'
 
-
-const store = createStore(slice);
+const store = configureStore({
+    reducer: { projetos:slice }
+});
 export default store;

@@ -1,26 +1,41 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
+import {Urlbase} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Urlbase.js'
+import {httpGet, httpPut} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Utils'
 
-const salvaProjetos = [{
-      id: '1',
-      nome:'Usuário teste',
-      projeto:'Projeto Redux',
-      desc: 'Descrição do projeto Em latim:  Vestibulum at eros malesuada, vehicula quam ac, scelerisque leo. Nullam nunc turpis, tincidunt ut tellus id, scelerisque mollis elit. Aliquam sagittis risus magna, at aliquet nunc vestibulum quis. Donec fermentum mi eget cursus accumsan. Suspendisse sollicitudin accumsan mi sit amet sagittis. Mauris id pharetra velit. Aenean non augue sit amet neque congue bibendum. Aliquam varius, nunc a ornare fermentum, ante nisi laoreet ex, a sodales sapien metus ut quam. Vivamus blandit, libero et blandit rhoncus, mi neque tempor nulla, in lacinia nisi lacus at neque. Nulla mattis velit eget mollis pulvinar. Nulla lacinia turpis et tincidunt ornare. Vestibulum non laoreet felis. Donec porta, sem vel blandit maximus, mi ante posuere tellus, ut faucibus nulla urna in tellus. Mauris ornare sit amet libero quis iaculis.',
-      info: 'Feito em 09/03/2021, Utilizando HTML na plataforma Repl.it. Projeto da Faculdade'
-      }]
+const projetosAdapter = createEntityAdapter();
 
-  function  updateProjetoReducer(projetos, projeto){
-    let index = projetos.map(p => p.id).indexOf(projeto.id);
-    projetos.splice(index, 1, projeto);
-    return projetos;
-}
+const salvaProjetos = projetosAdapter.getInitialState({
+    status: 'not_loaded',
+    error: null
+    /* o array projetos foi removido do state inicial, será criado pelo adapter */
+});
+
+export const fetchProjetos = createAsyncThunk('Projeto/fetchProjetos', async () => {
+    return await httpGet(`http://localhost:3004/projetos`);
+});
+
+export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer', async (projeto) => {
+    return await httpPut(`http://localhost:3004/projetos/0`, projeto);
+});
+
 
 export const sliceProjeto = createSlice({
     name: 'projetos',
     initialState: salvaProjetos,
-    reducers: {
-       updateProjeto: (state, action) => updateProjetoReducer(state, action.payload)
+    extraReducers: {
+        [fetchProjetos.pending]: (state, action) => {state.status = 'loading'},
+        [fetchProjetos.fulfilled]: (state, action) => {state.status = 'loaded'; projetosAdapter.setAll(state, action.payload);},
+        [fetchProjetos.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
+        [updateProjetoServer.pending]: (state, action) => {state.status = 'loading'},
+        [updateProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetosAdapter.upsertOne(state, action.payload);},
     }
 })
 
-export const {updateProjeto} = sliceProjeto.actions
 export default sliceProjeto.reducer
+
+export const {
+    selectAll: selectAllProjetos,
+    selectById: selectProjetosById,
+    selectIds: selectProjetosIds
+} = projetosAdapter.getSelectors(state => state.projetos)
+
