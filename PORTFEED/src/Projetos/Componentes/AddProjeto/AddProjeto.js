@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch, connect, useSelector } from 'react-redux';
-import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
+import { addProjetoServer, selectAllProjetos} from './SliceProjeto.js'
 
     
 
@@ -30,7 +30,7 @@ import { updateProjetoServer, selectAllProjetos} from './SliceProjeto.js'
     function handleSubmit(e){
         setProjeto(projeto.id = projetos.id)
         e.preventDefault();
-        dispatch(updateProjetoServer(projeto));
+        dispatch(addProjetoServer(projeto));
         history.push('/Projeto');
         document.documentElement.scrollTop = 0; 
     }

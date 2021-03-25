@@ -19,7 +19,7 @@ export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer
 });
 
 export const addProjetoServer = createAsyncThunk('projetos/addProjetoServer', async (projeto, {getState}) => {
-    return await httpPost(`http://localhost:3004/projetos/0`, projeto)
+    return await httpPost(`http://localhost:3004/projetos`, projeto)
 });
 export const sliceProjeto = createSlice({
     name: 'projetos',
