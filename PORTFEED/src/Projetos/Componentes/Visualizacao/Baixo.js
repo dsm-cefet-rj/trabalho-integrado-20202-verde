@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Link } from "react-router-dom"
+import { Link , useParams} from "react-router-dom"
 import {useSelector, connect, useDispatch } from 'react-redux';
 import {fetchProjetos, selectAllProjetos} from '../AddProjeto/SliceProjeto.js'
 //Projeto para o cabeçalho e barra de pesquisa
@@ -12,7 +12,8 @@ function Baixo(props){
   
     
   const dispatch = useDispatch();
-  
+
+
   useEffect(() => {
     if (status === 'not_loaded' ) {
         dispatch(fetchProjetos())
@@ -41,6 +42,9 @@ function Baixo(props){
 
 function InfoProjeto (props) 
 {
+  let { id } = useParams();
+    id = parseInt(id);
+
   const [curt,setCurt] = useState(()=> {return 0})
 
   function Curte()
@@ -56,7 +60,7 @@ function InfoProjeto (props)
      
   <div>
 <div class = "col-xs-12">
-<p class = "texto text-justify">Mais Informações: {props.projetos[0].info}</p>
+<p class = "texto text-justify">Mais Informações: {props.projetos[id].info}</p>
 </div>
 
 <div>
@@ -71,7 +75,7 @@ function InfoProjeto (props)
 <p class = "col-xs-6" id = "num">{curt}</p> 
 </div>
 <div class = "col-xs-6">
-<Link to ="/Edita">
+<Link to ={`/Edita/${props.projetos[id].id}`}>
 <input type="submit" value="Editar" name = 'salva' Onclick = {() =>edita()} />
  
  </Link>

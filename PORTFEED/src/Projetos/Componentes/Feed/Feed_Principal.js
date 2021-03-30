@@ -10,7 +10,7 @@ import {
 /*
 function Feed(props) {
   
-  const projetos = useSelector(selectAllProjetos)
+  
 
   const status = useSelector(state => state.projetos.status);
   const error = useSelector(state => state.projetos.error);
@@ -51,6 +51,7 @@ function add()
 }
 
 function Feed(props){
+  
   return(
   
     
@@ -58,15 +59,17 @@ function Feed(props){
       
         <div className = "li">
         <div className="caixa">
-            <Link to = "/Projeto">
+            <Link to = {`/Projeto/0`}>
+            <img className="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU " alt="P2"/>  
+            </Link>
+            <Link to = {`/Projeto/1`}>
             <img className="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU " alt="P2"/>  
             </Link>
             
             
-            
             </div>
         </div>
-        <Link to = "/Adiciona">
+        <Link to = "/Novo">
         <input type="submit" value="CRIAR NOVO" name = 'salva' Onclick = {() =>add()} />
         </Link>
     </div>

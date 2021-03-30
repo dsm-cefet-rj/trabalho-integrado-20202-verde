@@ -6,7 +6,6 @@ import Visualizacao_Projeto from './Visualizacao_Projeto.js';
 import Feed from './Feed';
 import Perfil from './Perfil';
 import EditarProjeto from './EditarProjeto.js';
-import AddProjeto from './AdicionarProjeto.js';
 
 import {
   BrowserRouter as Router,
@@ -17,19 +16,19 @@ import {
 ReactDOM.render(
   <Router>
     <Route exact = {true} path ="/">
+        <Feed/>
+      </Route>
+      <Route path ="/Projeto/:id">
         <Visualizacao_Projeto/>
       </Route>
-      <Route path ="/Projeto">
-        <Visualizacao_Projeto/>
-      </Route>
-      <Route path ="/Edita">
+      <Route path ="/Edita/:id">
         <EditarProjeto/>
       </Route>
       <Route path ="/User">
         <Perfil/>
       </Route>
-      <Route path ="/Adiciona">
-        <AddProjeto/>
+      <Route path ="/Novo">
+        <EditarProjeto/>
       </Route>
       <Route path ="/Feed">
         <Feed/>

@@ -16,12 +16,12 @@ export const fetchProjetos = createAsyncThunk('Projeto/fetchProjetos', async () 
     return await httpGet(`${Urlbase}/projetos`);
 });
 
-export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer', async (projeto) => {
-    return await httpPut(`${Urlbase}/projetos/0`, projeto);
+export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer', async (project) => {
+    return await httpPut(`${Urlbase}/projetos/${project.id}`, project);
 });
 
-export const addProjetoServer = createAsyncThunk('projetos/addProjetoServer', async (projeto, {getState}) => {
-    return await httpPost(`${Urlbase}/projetos`, projeto)
+export const addProjetoServer = createAsyncThunk('projetos/addProjetoServer', async (project, {getState}) => {
+    return await httpPost(`${Urlbase}/projetos`, project)
 });
 export const sliceProjeto = createSlice({
     name: 'projetos',
@@ -31,7 +31,7 @@ export const sliceProjeto = createSlice({
         [fetchProjetos.fulfilled]: (state, action) => {state.status = 'loaded'; projetosAdapter.setAll(state, action.payload);},
         [fetchProjetos.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
         [updateProjetoServer.pending]: (state, action) => {state.status = 'loading'},
-        [updateProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetosAdapter.upsertOne(state, action.payload);},
+        [updateProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetosAdapter.updateOne(state, action.payload);},
         [addProjetoServer.pending]: (state, action) => {state.status = 'loading'},
         [addProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetosAdapter.addOne(state, action.payload);},
     }
