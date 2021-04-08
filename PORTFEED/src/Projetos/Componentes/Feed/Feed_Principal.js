@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {useParams, useHistory} from "react-router-dom"
+import React, {useEffect} from 'react';
+import {useParams} from "react-router-dom"
 import {useSelector, connect, useDispatch} from 'react-redux';
 import {fetchProjetos, selectAllProjetos} from '../AddProjeto/SliceProjeto.js'
 import './Feed.css';
@@ -56,25 +56,25 @@ function Feed (props) {
   }
   
   function Post (props){
-    let { id } = useParams();
-    id = parseInt(id);
-
+    
     return(
       <div className="li">
         <div className="caixa" >
-       
+        <Link to = {`/Projeto/${props.post.id}`}>
          <img className="img-responsive" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU "  alt= "P2"/>  
-         <p> {props.projeto.nome} </p>
-          
+         <p> {props.post.nome} </p>
+         </Link>
           </div>
           </div>
     )
 
   }
 function RenderPost(props){    
+  
+    
     return(
       <div className = "container" id="projetos">
-        {props.projetos.map((projeto) => <Link to = {`/Projeto/${projeto.id}`}><Post key={projeto.id} projeto={projeto}/></Link>)}
+        {props.projetos.map((post) => <Post key={post.id} post={post}/>)}
         </div>
       
     )
