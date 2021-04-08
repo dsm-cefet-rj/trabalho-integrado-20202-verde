@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link , useParams} from "react-router-dom"
 import {useSelector, connect, useDispatch } from 'react-redux';
-import {fetchProjetos, selectAllProjetos} from '../AddProjeto/SliceProjeto.js'
+import {fetchProjetos, selectAllProjetos, deleteProjetoServer} from '../AddProjeto/SliceProjeto.js'
 //Projeto para o cabeçalho e barra de pesquisa
 function Baixo(props){
 
@@ -55,6 +55,12 @@ function InfoProjeto (props)
 {
      document.documentElement.scrollTop = 0
 }
+
+const dispatch = useDispatch();
+function handleClickExcluirProjeto(ident){
+  dispatch(deleteProjetoServer(ident));
+}
+
   return(
   <div>
      
@@ -76,9 +82,14 @@ function InfoProjeto (props)
 </div>
 <div class = "col-xs-6">
 <Link to ={`/Edita/${props.projetos[id].id}`}>
-<input type="submit" value="Editar" name = 'salva' Onclick = {() =>edita()} />
+<input type="submit" value="Editar" name = 'salva' onClick = {() =>edita()} />
  
  </Link>
+  </div>
+  <div class = "col-xs-6">
+  <Link to ='/Feed'>
+<input type="submit" value="Remover" name = 'deleta' onClick = {() => handleClickExcluirProjeto(props.projetos[id].id)} />
+</Link>
   </div>
 </div>
 </div>

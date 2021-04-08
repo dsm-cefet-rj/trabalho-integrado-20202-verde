@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
 //import {Urlbase} from 'C:/Users/Eduardo//Documents/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Urlbase.js'
-import {httpGet, httpPut, httpPost} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Utils'
+import {httpGet, httpPut, httpPost, httpDelete} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Utils'
 
 const Urlbase = 'http://localhost:3004';
 
@@ -9,11 +9,15 @@ const projetosAdapter = createEntityAdapter();
 const salvaProjetos = projetosAdapter.getInitialState({
     status: 'not_loaded',
     error: null
-    /* o array projetos foi removido do state inicial, será criado pelo adapter */
 });
 
 export const fetchProjetos = createAsyncThunk('Projeto/fetchProjetos', async () => {
     return await httpGet(`${Urlbase}/projetos`);
+});
+
+export const deleteProjetoServer = createAsyncThunk('projetos/deleteProjetoServer', async (idProjeto) => {
+    await httpDelete(`${Urlbase}/projetos/${idProjeto}`);
+    return idProjeto;
 });
 
 export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer', async (project) => {
@@ -34,6 +38,8 @@ export const sliceProjeto = createSlice({
         [updateProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetosAdapter.updateOne(state, action.payload);},
         [addProjetoServer.pending]: (state, action) => {state.status = 'loading'},
         [addProjetoServer.fulfilled]: (state, action) => {state.status = 'saved'; projetosAdapter.addOne(state, action.payload);},
+        [deleteProjetoServer.pending]: (state, action) => {state.status = 'loading'},
+       [deleteProjetoServer.fulfilled]: (state, action) => {state.status = 'deleted'; projetosAdapter.removeOne(state, action.payload);},
     }
 })
 
