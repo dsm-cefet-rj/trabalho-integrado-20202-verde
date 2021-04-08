@@ -54,7 +54,7 @@ function Feed(props){
   
   return(
   
-    
+    /* EDUARDDOOOOOOO ALI ONDE TA O "LINK TO" TEM QUE COLOCAR PRA ELE IR PARA O ID DO PROJETO, ASSIM : `/Projeto/${props.projetos.id}` ou algo assim*/
     <div className = "container">
       
         <div className = "li">
@@ -70,7 +70,7 @@ function Feed(props){
             </div>
         </div>
         <Link to = "/Novo">
-        <input type="submit" value="CRIAR NOVO" name = 'salva' Onclick = {() =>add()} />
+        <input type="submit" value="CRIAR NOVO" name = 'salva' onClick = {() =>add()} />
         </Link>
     </div>
 
