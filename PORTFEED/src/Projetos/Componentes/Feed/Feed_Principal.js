@@ -17,31 +17,6 @@ import {
   Link
 } from "react-router-dom"
 
-/*
-function Posts (props){
-
-    const projetos = useSelector(selectAllProjetos)
-    const status = useSelector(state => state.projetos.status)    
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-      if (status === 'not_loaded') {
-          dispatch(fetchProjetos())
-      } 
-  }, [status, dispatch])
-
-      switch(status){
-        case 'loaded':
-            return(
-              <Feed/>
-              );
-        case 'failed':
-        default:
-            return (<div></div>)
-    }
-}
-*/
-
 
 function Feed (props) {
 
@@ -80,8 +55,6 @@ function Feed (props) {
       
   
   }
-
-
   
   function Post (props){
     let { id } = useParams();
@@ -108,8 +81,5 @@ function RenderPost(props){
     )
 
 }
-//<Link to = {`/Projeto/${props.projetos[id].id}`}>
-//</Link> 
-
 
 export default connect(state => ({ projetos : state }))(Feed);
