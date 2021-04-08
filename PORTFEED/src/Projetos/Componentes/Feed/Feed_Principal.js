@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect} from 'react';
 import {useParams, useHistory} from "react-router-dom"
 import {useSelector, connect, useDispatch} from 'react-redux';
@@ -19,17 +18,14 @@ import {
 
 /*
 function Posts (props){
-
     const projetos = useSelector(selectAllProjetos)
     const status = useSelector(state => state.projetos.status)    
     const dispatch = useDispatch()
-
     useEffect(() => {
       if (status === 'not_loaded') {
           dispatch(fetchProjetos())
       } 
   }, [status, dispatch])
-
       switch(status){
         case 'loaded':
             return(
