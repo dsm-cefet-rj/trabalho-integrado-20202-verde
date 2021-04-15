@@ -17,7 +17,7 @@ function Descricao (props)
   const dispatch = useDispatch();
   
   let { id } = useParams();
-  id = parseInt(id);
+  
 
     
   const projetoFound = useSelector(state => selectProjetosById(state, id))
