@@ -14,6 +14,7 @@ const error = useSelector(state => state.projetos.error);
 const dispatch = useDispatch();
 
 let { id } = useParams();
+ 
 
   const projetoFound = useSelector(state => selectProjetosById(state, id))
 
