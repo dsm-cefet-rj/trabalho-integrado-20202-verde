@@ -61,7 +61,7 @@ function Feed (props) {
       <div className="li">
         <div className="caixa" >
         <Link to = {`/Projeto/${props.post.id}`}>
-         <img className="img-responsive" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU "  alt= "P2"/>  
+         <img className="img-responsive" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU "  alt= "P2"  onClick = {() =>document.documentElement.scrollTop = 0}/>  
          <p> {props.post.nome} </p>
          </Link>
           </div>
