@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Link, useParams } from "react-router-dom"
 import {useSelector, useDispatch } from 'react-redux';
-import {fetchProjetos, selectAllProjetos} from '../AddProjeto/SliceProjeto.js'
+import {fetchProjetos, selectAllProjetos, selectProjetosById} from '../AddProjeto/SliceProjeto.js'
 
 export default function Titulo(props){
 
@@ -12,6 +12,11 @@ const error = useSelector(state => state.projetos.error);
 
   
 const dispatch = useDispatch();
+
+let { id } = useParams();
+  id = parseInt(id);
+
+  const projetoFound = useSelector(state => selectProjetosById(state, id))
 
 useEffect(() => {
   if (status === 'not_loaded' || status === 'saved') {
@@ -24,7 +29,7 @@ useEffect(() => {
 
 let visuProjeto = '';
 if(status === 'loaded' || status === 'saved' || status === 'deleted'){
-  visuProjeto = <Texto projetos={projetos}/>;
+  visuProjeto = <Texto projetos={projetoFound}/>;
 }else if(status === 'loading'){
   visuProjeto = <div>Carregando Titulo...</div>;
 }else if(status === 'failed'){
@@ -40,17 +45,13 @@ if(status === 'loaded' || status === 'saved' || status === 'deleted'){
   
 }
 export function Texto(props){
-  
-  let { id } = useParams();
-  id = parseInt(id);
-  
     return(
       <aside>
       
         <div class= "container">
       <div class = "row" >
        <div class = "col-xs-12">
-      <h1 > {props.projetos[id].nome} 
+      <h1 > {props.projetos.nome} 
       
       <small >ㅤ Feito por :ㅤ  
              <Link to ="/User"> 

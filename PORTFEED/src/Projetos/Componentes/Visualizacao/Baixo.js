@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link , useParams} from "react-router-dom"
 import {useSelector, connect, useDispatch } from 'react-redux';
-import {fetchProjetos, selectAllProjetos, deleteProjetoServer} from '../AddProjeto/SliceProjeto.js'
+import {fetchProjetos, selectAllProjetos,selectProjetosById, deleteProjetoServer} from '../AddProjeto/SliceProjeto.js'
 //Projeto para o cabeçalho e barra de pesquisa
 function Baixo(props){
 
@@ -13,6 +13,11 @@ function Baixo(props){
     
   const dispatch = useDispatch();
 
+  let { id } = useParams();
+    id = parseInt(id);
+
+      
+    const projetoFound = useSelector(state => selectProjetosById(state, id))
 
   useEffect(() => {
     if (status === 'not_loaded' ) {
@@ -26,7 +31,7 @@ function Baixo(props){
   
   let infoProjeto = '';
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
-    infoProjeto = <InfoProjeto projetos={projetos}/>;
+    infoProjeto = <InfoProjeto projetos={projetoFound}/>;
   }else if(status === 'loading'){
     infoProjeto = <div>Carregando Informações Extras...</div>;
   }else if(status === 'failed'){
@@ -66,7 +71,7 @@ function handleClickExcluirProjeto(ident){
      
   <div>
 <div class = "col-xs-12">
-<p class = "texto text-justify">Mais Informações: {props.projetos[id].info}</p>
+<p class = "texto text-justify">Mais Informações: {props.projetos.info}</p>
 </div>
 
 <div>
@@ -81,14 +86,14 @@ function handleClickExcluirProjeto(ident){
 <p class = "col-xs-6" id = "num">{curt}</p> 
 </div>
 <div class = "col-xs-6">
-<Link to ={`/Edita/${props.projetos[id].id}`}>
+<Link to ={`/Edita/${props.projetos.id}`}>
 <input type="submit" value="Editar" name = 'salva' onClick = {() =>edita()} />
  
  </Link>
   </div>
   <div class = "col-xs-6">
   <Link to ='/Feed'>
-<input type="submit" value="Remover" name = 'deleta' onClick = {() => handleClickExcluirProjeto(props.projetos[id].id)} />
+<input type="submit" value="Remover" name = 'deleta' onClick = {() => handleClickExcluirProjeto(props.projetos.id)} />
 </Link>
   </div>
 </div>

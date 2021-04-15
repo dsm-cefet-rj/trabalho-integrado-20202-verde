@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useParams} from "react-router-dom"
 import {useSelector, useDispatch } from 'react-redux';
-import {fetchProjetos, selectAllProjetos} from '../AddProjeto/SliceProjeto.js'
+import {fetchProjetos, selectAllProjetos, selectProjetosById} from '../AddProjeto/SliceProjeto.js'
 
 function Descricao (props)
 { 
@@ -16,7 +16,11 @@ function Descricao (props)
     
   const dispatch = useDispatch();
   
+  let { id } = useParams();
+  id = parseInt(id);
 
+    
+  const projetoFound = useSelector(state => selectProjetosById(state, id))
 
   useEffect(() => {
     if (status === 'not_loaded' ) {
@@ -30,7 +34,7 @@ function Descricao (props)
   
   let descProjeto = '';
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
-    descProjeto = <Desc projetos={projetos}/>;
+    descProjeto = <Desc projetos={projetoFound}/>;
   }else if(status === 'loading'){
     descProjeto = <div>Carregando Descrição...</div>;
   }else if(status === 'failed'){
@@ -47,13 +51,10 @@ function Descricao (props)
 
   function Desc (props) 
   {
-  let { id } = useParams();
-  id = parseInt(id);
-
   return(
   <aside>
   
-    <p class = "col-xs-12 text-justify"> {props.projetos[id].desc}</p>
+    <p class = "col-xs-12 text-justify"> {props.projetos.desc}</p>
 </aside>
 );
   }
