@@ -14,7 +14,7 @@ function Baixo(props){
   const dispatch = useDispatch();
 
   let { id } = useParams();
-    id = parseInt(id);
+   
 
       
     const projetoFound = useSelector(state => selectProjetosById(state, id))
@@ -48,7 +48,7 @@ function Baixo(props){
 function InfoProjeto (props) 
 {
   let { id } = useParams();
-    id = parseInt(id);
+   
 
   const [curt,setCurt] = useState(()=> {return 0})
 

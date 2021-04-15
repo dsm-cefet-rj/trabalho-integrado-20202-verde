@@ -51,6 +51,11 @@ function Descricao (props)
 
   function Desc (props) 
   {
+
+  let { id } = useParams();
+ 
+
+
   return(
   <aside>
   

@@ -5,7 +5,7 @@ setLocale(ptForm)
 
 export let esquemaProjeto = object().shape(
     {
-        id: number(),
+        id: string(),
         nome: string().required().max(30),
         desc: string().required().max(400),
         info: string().required().max(100),

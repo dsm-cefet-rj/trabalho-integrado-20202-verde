@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom"
 import {useSelector, connect, useDispatch} from 'react-redux';
-import {fetchProjetos, selectAllProjetos} from '../AddProjeto/SliceProjeto.js'
+import {fetchProjetos, selectAllProjetos, selectProjetosById} from '../AddProjeto/SliceProjeto.js'
 import './Feed.css';
 
 /*
@@ -31,7 +31,7 @@ function Feed (props) {
   }, [status, dispatch])
   
 
-  let Feed = '';
+  let Feed;
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
     Feed = <RenderPost projetos={projetos}/>;
   }else if(status === 'loading'){
@@ -55,8 +55,8 @@ function Feed (props) {
   
   }
   
-  function Post (props){
-    
+  function Post (props){  
+
     return(
       <div className="li">
         <div className="caixa" >
@@ -71,7 +71,7 @@ function Feed (props) {
   }
 function RenderPost(props){    
   
-    
+ 
     return(
       <div className = "container" id="projetos">
         {props.projetos.map((post) => <Post key={post.id} post={post}/>)}

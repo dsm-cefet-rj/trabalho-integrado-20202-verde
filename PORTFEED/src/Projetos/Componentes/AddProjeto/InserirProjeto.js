@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
     const dispatch = useDispatch()
 
     let { id } = useParams();
-    id = parseInt(id);
+    
 
     const projetoFound = useSelector(state => selectProjetosById(state, id))
 

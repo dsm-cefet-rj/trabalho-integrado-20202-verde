@@ -45,6 +45,11 @@ if(status === 'loaded' || status === 'saved' || status === 'deleted'){
   
 }
 export function Texto(props){
+
+  
+  let { id } = useParams();
+  
+  
     return(
       <aside>
       

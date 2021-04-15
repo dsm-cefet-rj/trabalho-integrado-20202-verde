@@ -6,6 +6,17 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/Projeto');
 
+var config = require('./config');
+const mongoose = require('mongoose');
+
+const url = config.mongoUrl;
+const connect = mongoose.connect(url);
+
+connect.then((db) => {
+    console.log("Connectado ao server");
+  }, (err) => { console.log(err); });
+  
+
 var app = express();
 
 app.use(logger('dev'));
