@@ -17,7 +17,6 @@ function Descricao (props)
   const dispatch = useDispatch();
   
   let { id } = useParams();
-  id = parseInt(id);
 
     
   const projetoFound = useSelector(state => selectProjetosById(state, id))
@@ -51,10 +50,6 @@ function Descricao (props)
 
   function Desc (props) 
   {
-
-  let { id } = useParams();
- 
-
 
   return(
   <aside>
