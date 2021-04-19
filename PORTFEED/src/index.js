@@ -6,6 +6,7 @@ import Visualizacao_Projeto from './Visualizacao_Projeto.js';
 import Feed from './Feed';
 import Perfil from './Perfil';
 import EditarProjeto from './EditarProjeto.js';
+import EditarPerfil from './EditarPerfil.js';
 
 import {
   BrowserRouter as Router,
@@ -29,6 +30,9 @@ ReactDOM.render(
       </Route>
       <Route path ="/Novo">
         <EditarProjeto/>
+      </Route>
+      <Route path ="/Altera/:id">
+        <EditarPerfil/>
       </Route>
       <Route path ="/Feed">
         <Feed/>

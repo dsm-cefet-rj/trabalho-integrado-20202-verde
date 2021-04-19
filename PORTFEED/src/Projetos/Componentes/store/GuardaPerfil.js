@@ -1,17 +1,7 @@
-import {createStore} from "redux";
+import {configureStore} from "@reduxjs/toolkit";
+import slice from '../AddPerfil/SlicePerfil.js'
 
-function reducer()
-{
-  return [
-    {
-      areaAt: ' Jogos, Design, Fotografia',
-      bio: ' Estudante universitário',
-      post:'teste',
-      id:'1'
-    }
-  ];
-}
-
-const store = createStore(reducer);
-
-export default store; 
+const store = configureStore({
+    reducer: { usuario:slice }
+});
+export default store;

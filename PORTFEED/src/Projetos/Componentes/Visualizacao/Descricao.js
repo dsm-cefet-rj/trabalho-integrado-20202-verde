@@ -18,6 +18,8 @@ function Descricao (props)
   
   let { id } = useParams();
   
+
+    
   const projetoFound = useSelector(state => selectProjetosById(state, id))
 
   useEffect(() => {

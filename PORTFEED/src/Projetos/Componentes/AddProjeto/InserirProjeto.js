@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 
     let { id } = useParams();
     
+    var titulo;
 
     const projetoFound = useSelector(state => selectProjetosById(state, id))
 
@@ -42,10 +43,13 @@ import { useForm } from "react-hook-form";
     
     function onSubmit(projeto){
         if(actionType === 'projetos/addProjeto'){
+            
+            titulo = 'Novo Projeto'
             dispatch(addProjetoServer(projeto));
             history.push('/Feed');
             console.log('adicionou')
         }else{
+            titulo = 'Editar Projeto'
             console.log(projetoFound.nome + ' ' + projetoFound.desc + '' + projetoFound.id)
             dispatch(updateProjetoServer({...projeto, id:projetoFound.id }));
             history.push('/Projeto/'+ id);
@@ -60,8 +64,17 @@ import { useForm } from "react-hook-form";
         document.documentElement.scrollTop = 0; 
     }
 
+    if(actionType === 'projetos/addProjeto')
+    {
+        titulo = 'Novo Projeto'
+    }
+    else
+    {
+        titulo = 'Editar Projeto'
+    }
+
     return(<div>
-            <h1>Editar Projeto</h1>
+            <h1>{titulo}</h1>
             
             <form onSubmit={handleSubmit(onSubmit)}>
             

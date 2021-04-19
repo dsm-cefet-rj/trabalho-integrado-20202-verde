@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from "react-router-dom"
 
 class Projetos extends React.Component {
   render(){
@@ -41,14 +42,9 @@ class Projetos extends React.Component {
              </div>
            </div>
           </div>
+          
           </div>
      );
   }
 }
-
-ReactDOM.render(
-  <Projetos/>,
-  document.getElementById('root')
-);
-
 export default Projetos;
