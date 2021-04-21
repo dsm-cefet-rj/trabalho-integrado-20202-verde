@@ -7,6 +7,8 @@ import Feed from './Feed';
 import Perfil from './Perfil';
 import EditarProjeto from './EditarProjeto.js';
 import EditarPerfil from './EditarPerfil.js';
+import EditarPostagem from './EditarPostagem.js';
+
 
 import {
   BrowserRouter as Router,
@@ -36,6 +38,9 @@ ReactDOM.render(
       </Route>
       <Route path ="/Feed">
         <Feed/>
+      </Route>
+      <Route path ="/postagem/:id">
+        <EditarPostagem/>
       </Route>
     </Router>,document.getElementById('root'));
 
