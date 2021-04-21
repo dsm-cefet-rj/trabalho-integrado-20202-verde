@@ -20,6 +20,10 @@ const projetoSchema = new Schema({
     id:{
         type: String,
         ref: 'id'
+    },
+    usuario:{
+        type: String,
+        required: true
     }
     
 })

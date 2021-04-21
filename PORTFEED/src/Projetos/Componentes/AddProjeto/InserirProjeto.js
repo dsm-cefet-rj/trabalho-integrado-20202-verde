@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { updateProjetoServer,addProjetoServer, selectAllProjetos, selectProjetosById} from './SliceProjeto.js'
@@ -9,11 +9,11 @@ import { useForm } from "react-hook-form";
 
   function InserirProjeto(props){
 
-
+    
     const projetos = useSelector(selectAllProjetos)
 
     const history = useHistory();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     let { id } = useParams();
     
@@ -35,16 +35,19 @@ import { useForm } from "react-hook-form";
     
     if(actionType === 'projetos/addProjeto'){
     console.log('Teste add')
+    titulo = 'Novo Projeto'
     }
     else   
-    { 
+    {     
+    titulo = 'Editar Projeto'
     console.log('Teste upd')
     }
-    
+
+
     function onSubmit(projeto){
         if(actionType === 'projetos/addProjeto'){
-            
-            titulo = 'Novo Projeto'
+            console.log(projeto);
+            console.log({projeto});
             dispatch(addProjetoServer(projeto));
             history.push('/Feed');
             console.log('adicionou')
@@ -62,15 +65,6 @@ import { useForm } from "react-hook-form";
     { 
         history.push('/');
         document.documentElement.scrollTop = 0; 
-    }
-
-    if(actionType === 'projetos/addProjeto')
-    {
-        titulo = 'Novo Projeto'
-    }
-    else
-    {
-        titulo = 'Editar Projeto'
     }
 
     return(<div>
@@ -121,9 +115,36 @@ import { useForm } from "react-hook-form";
              
              </div>
             </div>
+            
             </form>
+            <div class= 'fant'>
+            <input type="text" class= 'fant'  name="usuario"   defaultValue={CheckUser()} ref ={register}/>
+            </div>
           </div>
+          
 );
+}
+
+function CheckUser()
+    {
+        const [users, setUsers] = React.useState(null);
+        const dispatch = useDispatch();
+
+        var nome;
+
+        console.log(users)
+        React.useEffect(() => {
+        if (!users){
+        fetch("http://localhost:3004/users").then(x =>
+            x.json().then(y => {
+                setUsers(y.name);
+            })
+        );
+    }
+    
+  }, [users,dispatch]);
+
+     return ( users )
 }
 
 export default (InserirProjeto)

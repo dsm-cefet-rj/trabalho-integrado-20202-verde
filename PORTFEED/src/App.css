@@ -94,6 +94,10 @@ mark {
    font-size: 230%;
    text-align:center;
 }
+.fant{
+  opacity: 0.0;
+  position: absolute;  left: -999999px;
+}
 
 .coluna {
   flex: 33.33%;
