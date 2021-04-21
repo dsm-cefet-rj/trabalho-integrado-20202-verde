@@ -4,7 +4,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/Projeto');
+var projetosRouter = require('./routes/Projeto');
+var postagemRouter = require('./routes/Postagem');
 
 var config = require('./config');
 const mongoose = require('mongoose');
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/projetos', usersRouter);
+app.use('/projetos', projetosRouter);
+app.use('/postagem', postagemRouter);
 
 module.exports = app;
