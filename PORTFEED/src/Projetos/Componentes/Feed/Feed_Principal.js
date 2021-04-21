@@ -55,14 +55,14 @@ function Feed (props) {
   
   }
   
-  function Post (props){  
+  function Proj (props){  
 
     return(
       <div className="li">
         <div className="caixa" >
-        <Link to = {`/Projeto/${props.post.id}`}>
-         <img className="img-responsive" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU "  alt= "P2"  onClick = {() =>document.documentElement.scrollTop = 0}/>  
-         <p> {props.post.nome} </p>
+        <Link to = {`/Projeto/${props.port.id}`}>
+         <img className="img-responsive" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU"  alt= "P2"  onClick = {() =>document.documentElement.scrollTop = 0}/>  
+         <p> {props.port.nome} </p>
          </Link>
           </div>
           </div>
@@ -71,10 +71,10 @@ function Feed (props) {
   }
 function RenderPost(props){    
   
- 
+    props.projetos.reverse();
     return(
       <div className = "container" id="projetos">
-        {props.projetos.map((post) => <Post key={post.id} post={post}/>)}
+        {props.projetos.map((port) => <Proj key={port.id} port={port}/>)}
         </div>
       
     )
