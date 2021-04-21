@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { updatePostagemServer,fetchPostagem,addPostagemServer, selectAllPostagem, selectPostagemById} from './SlicePostagem'
-import {esquemaPostagem} from 'C:/Users/Eduardo/Documents/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Projetos/esquemaPostagem.js';
+import {esquemaPostagem} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Projetos/esquemaPostagem.js';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
     

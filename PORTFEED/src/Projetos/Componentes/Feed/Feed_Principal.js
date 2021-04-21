@@ -44,9 +44,7 @@ function Feed (props) {
           return(
             <div className = "container" id="projetos">
                <div className = "container" id="projetos">
-               <Link to = "/Novo">
-                <input type="submit" value="CRIAR NOVO" name = 'salva' />
-                </Link> 
+               {CheckUser()}
                {Feed}
                </div>
             </div>
@@ -80,5 +78,39 @@ function RenderPost(props){
     )
 
 }
+
+function CheckUser() {
+  const [loading, setLoading] = React.useState(true);
+  const [users, setUsers] = React.useState(null);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (!users){
+    fetch("http://localhost:3004/users").then(x =>
+      x.json().then(y => {
+        setUsers(y.name);
+        setLoading(false);
+      })
+    );
+  }
+  
+  }, [users,dispatch]);
+
+  if (loading) {
+    return (<div> Carregando... </div>)
+  }
+  
+  if (users){
+    return (
+      <Link to = "/Novo">
+      <input type="submit" value="CRIAR NOVO" name = 'salva' onClick = {() =>document.documentElement.scrollTop = 0}/>
+      </Link> 
+    )
+  }
+  else{
+    return (<div>  </div>)
+  }
+}
+
 
 export default connect(state => ({ projetos : state }))(Feed);
