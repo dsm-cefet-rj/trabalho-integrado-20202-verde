@@ -24,8 +24,10 @@ function Usuario(props){
   
   
   let UsuarioInfo = '';
+  let checkUser = '';
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
     UsuarioInfo = <User usuario={usuarios}/>;
+    checkUser = <CheckUser usuario={usuarios}/>;
   }else if(status === 'loading'){
     UsuarioInfo = <div>Carregando Informações Extras...</div>;
   }else if(status === 'failed'){
@@ -35,6 +37,7 @@ function Usuario(props){
 
      return( <>
           {UsuarioInfo}
+          {checkUser}
    </>
    );
 }
@@ -59,11 +62,45 @@ function User (props)
          </div>
          <br />
        </div>
+       
+  </aside>
+  )
+}
+
+function CheckUser(props) {
+  const [loading, setLoading] = React.useState(true);
+  const [users, setUsers] = React.useState(null);
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (!users){
+    fetch("http://localhost:3004/users").then(x =>
+      x.json().then(y => {
+        setUsers(y);
+        setLoading(false);
+      })
+    );
+  }
+  
+  }, [users,dispatch]);
+
+  if (loading) {
+    return (<div> Carregando... </div>)
+  }
+  
+  if (users.name == props.usuario[0].usuario){
+    return (
+      <div>
        <Link to ={`/Altera/${props.usuario[0].id}`}>
           <input type="submit" value="editar" name = 'Editar' onClick = {() =>document.documentElement.scrollTop = 0} />
           </Link>
-  </aside>
-  )
+      </div>
+    )
+  }
+  else{
+    return (<div>  </div>)
+  }
 }
 
 export default connect(state => ({ nome : state }))(Usuario);

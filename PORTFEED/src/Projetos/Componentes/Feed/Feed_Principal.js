@@ -69,7 +69,6 @@ function Feed (props) {
   }
 function RenderPost(props){    
   
-    props.projetos.reverse();
     return(
       <div className = "container" id="projetos">
         {props.projetos.map((port) => <Proj key={port.id} port={port}/>)}

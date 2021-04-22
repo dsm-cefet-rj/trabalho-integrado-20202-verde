@@ -42,7 +42,7 @@ import { useForm } from "react-hook-form";
         }else{
             console.log('atualizou')
             dispatch(updateusuarioServer({...usuario, id:usuarioFound.id }));
-            history.push('/User');
+            history.push('/User/6081d0870b778b57b06f1923');
             dispatch(fetchUsuario())
         }
         document.documentElement.scrollTop = 0; 
@@ -50,7 +50,7 @@ import { useForm } from "react-hook-form";
 
     function cancela()
     { 
-        history.push('/User');
+        history.push('/User/6081d0870b778b57b06f1923');
         document.documentElement.scrollTop = 0; 
     }
 
@@ -97,8 +97,34 @@ import { useForm } from "react-hook-form";
              </div>
             </div>
             </form>
+            <div class= 'fant'>
+            <input type="text" class= 'fant'  name="usuario"   defaultValue={CheckUser()} ref ={register}/>
+            </div>
+
           </div>
 );
+}
+
+function CheckUser()
+    {
+        const [users, setUsers] = React.useState(null);
+        const dispatch = useDispatch();
+
+        var nome;
+
+        console.log(users)
+        React.useEffect(() => {
+        if (!users){
+        fetch("http://localhost:3004/users").then(x =>
+            x.json().then(y => {
+                setUsers(y.name);
+            })
+        );
+    }
+    
+  }, [users,dispatch]);
+
+     return ( users )
 }
 
 export default (InserirPerfil)

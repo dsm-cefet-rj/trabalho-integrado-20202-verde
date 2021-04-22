@@ -27,7 +27,7 @@ ReactDOM.render(
       <Route path ="/Edita/:id">
         <EditarProjeto/>
       </Route>
-      <Route path ="/User">
+      <Route path ="/User/:id">
         <Perfil/>
       </Route>
       <Route path ="/Novo">

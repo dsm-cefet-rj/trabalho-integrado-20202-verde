@@ -12,6 +12,7 @@ router.route('/')
 
   try{
     const usuariobd = await Usuario.find({});
+    console.log({usuariobd});
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(usuariobd);
