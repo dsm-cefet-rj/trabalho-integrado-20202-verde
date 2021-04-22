@@ -10,6 +10,7 @@ var authenticate = require('./authenticate');
 
 var indexRouter = require('./routes/index');
 var projetosRouter = require('./routes/Projeto');
+var usuarioRouter = require('./routes/Usuario');
 var postagemRouter = require('./routes/Postagem');
 var usersRouter = require('./routes/user');
 var User = require('./models/users');
@@ -42,5 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/projetos', projetosRouter);
 app.use('/postagem', postagemRouter);
+app.use('/usuario', usuarioRouter);
 
 module.exports = app;
