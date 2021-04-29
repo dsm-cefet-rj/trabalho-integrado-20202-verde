@@ -12,7 +12,7 @@ var indexRouter = require('./routes/index');
 var projetosRouter = require('./routes/Projeto');
 var usuarioRouter = require('./routes/Usuario');
 var postagemRouter = require('./routes/Postagem');
-var usersRouter = require('./routes/user');
+var usersRouter = require('./routes/users');
 var User = require('./models/users');
 
 var config = require('./config');

@@ -21,11 +21,12 @@ const usuarioSchema = new Schema({
         type: String,
         ref: 'id'
     },
+    /*
     usuario:{
         type: String,
         required: true
     }
-    
+    */
 })
 
 usuarioSchema.plugin(normalize);

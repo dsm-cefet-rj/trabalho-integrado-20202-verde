@@ -9,9 +9,10 @@ var authenticate = require('../authenticate');
 
 const Usuario = require('../models/users');
 var nome;
+//ver isso aqui 
 
 router.use(bodyParser.json());
-
+/*
 router.route('/')
 .get(async (req, res, next) => {
 
@@ -27,7 +28,7 @@ router.route('/')
   }
   
 })
-
+*/
 router.post('/signup', (req, res, next) => {
     User.register(new User({username: req.body.username}), req.body.password, 
     (err, user) => {

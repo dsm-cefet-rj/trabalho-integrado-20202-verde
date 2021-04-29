@@ -21,9 +21,15 @@ const projetoSchema = new Schema({
         type: String,
         ref: 'id'
     },
+    /*
     usuario:{
         type: String,
         required: true
+    },
+    */
+    favorito: {
+        type: Boolean,
+        default: false
     }
     
 })

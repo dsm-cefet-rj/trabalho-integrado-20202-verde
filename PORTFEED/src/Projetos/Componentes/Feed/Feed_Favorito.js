@@ -31,34 +31,30 @@ function Feed (props) {
   }, [status, dispatch])
   
 
-  let Feed;
+  let FeedFav;
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
-    Feed = <RenderPost projetos={projetos}/>;
+    FeedFav = <RenderPost projetos={projetos}/>;
   }else if(status === 'loading'){
-    Feed = <div>Carregando Feed...</div>;
+    FeedFav = <div>Carregando Feed...</div>;
   }else if(status === 'failed'){
-    Feed = <div>Error: {error}</div>;
+    FeedFav = <div>Error: {error}</div>;
   }
 
  
           return(
             <div className = "container" id="projetos">
                <div className = "container" id="projetos">
-               <Link to = "/Novo">
-                <input type="submit" value="CRIAR PORT" name = 'salva' onClick = {() =>document.documentElement.scrollTop = 0}/>
-                </Link> 
-               {Feed}
+               {FeedFav}
                </div>
             </div>
           );
       
-  
   }
   
   function Proj (props){  
 
     return(
-      <div className="li">
+        <div className="li">
         <div className="caixa" >
         <div className="col-xs-4">
          <p> {props.port.nome} </p>
@@ -86,39 +82,5 @@ function RenderPost(props){
     )
 
 }
-/*
-function CheckUser() {
-  const [loading, setLoading] = React.useState(true);
-  const [users, setUsers] = React.useState(null);
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (!users){
-    fetch("http://localhost:3004/users").then(x =>
-      x.json().then(y => {
-        setUsers(y.name);
-        setLoading(false);
-      })
-    );
-  }
-  
-  }, [users,dispatch]);
-
-  if (loading) {
-    return (<div> Carregando... </div>)
-  }
-  
-  if (users){
-    return (
-      <Link to = "/Novo">
-      <input type="submit" value="CRIAR NOVO" name = 'salva' onClick = {() =>document.documentElement.scrollTop = 0}/>
-      </Link> 
-    )
-  }
-  else{
-    return (<div>  </div>)
-  }
-}
-*/
 
 export default connect(state => ({ projetos : state }))(Feed);

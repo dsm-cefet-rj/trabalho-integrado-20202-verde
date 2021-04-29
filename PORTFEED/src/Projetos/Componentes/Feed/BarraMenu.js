@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Feed.css';
+import {
+  Link
+} from "react-router-dom"
 
-
-const tag = ['Todas' ,'Code' , 'Game', 'Tech', 'Design', 'Fotografia','Musica']
 
 export default function BarraMenu(){
-    const [position, setPosition] = useState(0);
+
+  /*  
+  const [position, setPosition] = useState(0);
     const [tags, setTag] = useState('');
 
     const onPress = () => {    
@@ -19,21 +22,27 @@ export default function BarraMenu(){
     setTag(tag[position]);
    }, [position]);
   
-  
+  */
 
-
+   
     return (
       <div className="borda">
       <div className="barra">
-      <button className="button, col-xs-4" onClick={() => alert('Todos')}>
-        Todos
+      <Link to = "/FeedPost">
+      <button className="button, col-xs-4">
+        Posts
       </button>
-      <button className="button, col-xs-4" onClick={() => alert('Favoritos')}>
+      </Link>
+      <Link to = "/Feed"> 
+      <button className="button, col-xs-4">
+        Projetos
+      </button>
+      </Link> 
+      <Link to = "/FeedFav">
+      <button className="button, col-xs-4 ">
         Favoritos
       </button>
-      <button className="button, col-xs-4 " onClick={onPress}>
-        Tags <span> - {tags} </span>
-      </button>
+      </Link> 
       </div>
       </div>
     );

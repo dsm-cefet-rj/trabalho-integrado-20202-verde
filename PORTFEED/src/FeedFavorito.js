@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Head from './Projetos/Componentes/Head.js';
 import BarraMenu from './Projetos/Componentes/Feed/BarraMenu.js'
-import FeedPrincipal from './Projetos/Componentes/Feed/Feed_Principal.js'
+import FeedFav from './Projetos/Componentes/Feed/Feed_Favorito.js'
 import {Provider} from "react-redux";
 import store from './Projetos/Componentes/store/GuardaProjeto.js'
 
@@ -15,7 +15,7 @@ function Feed() {
     <Provider store = {store}> 
     <Head/> 
     <BarraMenu/>
-    <FeedPrincipal/>
+    <FeedFav/>
     </Provider>
     </header>
       

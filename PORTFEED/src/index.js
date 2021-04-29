@@ -8,6 +8,8 @@ import Perfil from './Perfil';
 import EditarProjeto from './EditarProjeto.js';
 import EditarPerfil from './EditarPerfil.js';
 import EditarPostagem from './EditarPostagem.js';
+import FeedPost from './FeedPostagem.js';
+import FeedFav from './FeedFavorito.js'
 
 
 import {
@@ -39,7 +41,16 @@ ReactDOM.render(
       <Route path ="/Feed">
         <Feed/>
       </Route>
-      <Route path ="/postagem/:id">
+      <Route path ="/FeedPost">
+        <FeedPost/>
+      </Route>
+      <Route path ="/FeedFav">
+        <FeedFav/>
+      </Route>
+      <Route path ="/NovoPost">
+        <EditarPostagem/>
+      </Route>
+      <Route path ="/EditaPost/:id">
         <EditarPostagem/>
       </Route>
     </Router>,document.getElementById('root'));
