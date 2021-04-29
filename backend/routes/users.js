@@ -12,7 +12,7 @@ var nome;
 //ver isso aqui 
 
 router.use(bodyParser.json());
-/*
+
 router.route('/')
 .get(async (req, res, next) => {
 
@@ -28,7 +28,7 @@ router.route('/')
   }
   
 })
-*/
+
 router.post('/signup', (req, res, next) => {
     User.register(new User({username: req.body.username}), req.body.password, 
     (err, user) => {
@@ -53,7 +53,7 @@ router.post('/signup', (req, res, next) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     nome = req.user.username
-    res.json({success: true, token: token, status: 'You are successfully logged in!', name : req.user.username});
+    res.json({id: req.user._id, token: token, status: 'You are successfully logged in!', name : req.user.username});
   });
   
   router.get('/logout', (req, res, next) => {

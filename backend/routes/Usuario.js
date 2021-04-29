@@ -2,17 +2,17 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Usuario = require('../models/usuario');
-const cors = require('./cors');
+var authenticate = require('../authenticate');
 
 router.use(bodyParser.json());
 
 
 
 router.route('/')
-.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200);})
-.get(cors.corsWithOptions, async (req, res, next) => {
+.get(async (req, res, next) => {
 
   try{
+    
     const usuariobd = await Usuario.find({});
     console.log({usuariobd});
     res.statusCode = 200;
@@ -26,7 +26,7 @@ router.route('/')
   
 })
 
-.post(cors.corsWithOptions, (req, res, next) => {
+.post(authenticate.verifyUser,(req, res, next) => {
 
     Usuario.create(req.body)
     .then((usuariobd) => {
@@ -39,8 +39,7 @@ router.route('/')
   })
   
   router.route('/:id')
-  .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200);})
-  .put(cors.corsWithOptions, (req, res, next) => {
+  .put(authenticate.verifyUser,(req, res, next) => {
     
     Usuario.findByIdAndUpdate(req.params.id, {
       $set: req.body
@@ -53,7 +52,7 @@ router.route('/')
     .catch((err) => next(err));
   
   })
-  .get(cors.corsWithOptions, (req, res, next) => {
+  .get(authenticate.verifyUser,(req, res, next) => {
     
     Usuario.findById(req.params.id)
       .then((resp) => {
@@ -65,7 +64,7 @@ router.route('/')
   
   })
   
-  .delete(cors.corsWithOptions, (req, res, next) => {
+  .delete(authenticate.verifyUser,(req, res, next) => {
     
     Usuario.findByIdAndRemove(req.params.id)
       .then((resp) => {

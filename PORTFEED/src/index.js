@@ -10,7 +10,7 @@ import EditarPerfil from './EditarPerfil.js';
 import EditarPostagem from './EditarPostagem.js';
 import FeedPost from './FeedPostagem.js';
 import FeedFav from './FeedFavorito.js'
-
+import User from './User.js'
 
 import {
   BrowserRouter as Router,
@@ -38,6 +38,9 @@ ReactDOM.render(
       <Route path ="/Altera/:id">
         <EditarPerfil/>
       </Route>
+      <Route path ="/Cria">
+        <EditarPerfil/>
+      </Route>
       <Route path ="/Feed">
         <Feed/>
       </Route>
@@ -52,6 +55,12 @@ ReactDOM.render(
       </Route>
       <Route path ="/EditaPost/:id">
         <EditarPostagem/>
+      </Route>
+      <Route path ="/Registrar">
+        <User/>
+      </Route>
+      <Route path ="/Logar">
+        <User/>
       </Route>
     </Router>,document.getElementById('root'));
 

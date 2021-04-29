@@ -23,9 +23,8 @@ function Visualizacao_Projeto() {
      
     <header> 
     
-      
-    <Head/>
     <Provider store = {store}>
+    <Head/>
     <Titulo />
     <Descricao/>
     <Images/>

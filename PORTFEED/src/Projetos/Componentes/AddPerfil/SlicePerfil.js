@@ -15,17 +15,17 @@ export const fetchUsuario = createAsyncThunk('usuario/fetchUsuario', async () =>
     return await httpGet(`${Urlbase}/usuario`);
 });
 
-export const deleteusuarioServer = createAsyncThunk('usuario/deleteusuarioServer', async (idPerfil) => {
-    await httpDelete(`${Urlbase}/usuario/${idPerfil}`);
+export const deleteusuarioServer = createAsyncThunk('usuario/deleteusuarioServer', async (idPerfil, {getState}) => {
+    await httpDelete(`${Urlbase}/usuario/${idPerfil}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idPerfil;
 });
 
-export const updateusuarioServer = createAsyncThunk('usuario/updateusuarioServer', async (perfil) => {
-    return await httpPut(`${Urlbase}/usuario/${perfil.id}`, perfil);
+export const updateusuarioServer = createAsyncThunk('usuario/updateusuarioServer', async (perfil, {getState}) => {
+    return await httpPut(`${Urlbase}/usuario/${perfil.id}`, perfil, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const addusuarioServer = createAsyncThunk('usuario/addusuarioServer', async (perfil, {getState}) => {
-    return await httpPost(`${Urlbase}/usuario`, perfil)
+    return await httpPost(`${Urlbase}/usuario`, perfil, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}})
 });
 export const sliceUsuario = createSlice({
     name: 'usuario',

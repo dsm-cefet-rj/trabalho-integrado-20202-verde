@@ -55,7 +55,7 @@ export function Texto(props){
       <h1 > {props.projetos.nome} 
       
       <small >ㅤ Feito por :ㅤ  
-             <Link to ="/User/6081d0870b778b57b06f1923"> 
+      <Link to = {`/User/608882318df1823d40084d21`}>
             Usuário</Link>
       </small>
       </h1>

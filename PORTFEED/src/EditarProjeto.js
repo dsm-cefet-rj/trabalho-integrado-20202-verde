@@ -11,8 +11,8 @@ function EditarProjeto() {
     
      
     <header> 
+      <Provider store = {store}>
     <Head/>
-    <Provider store = {store}>
     <InserirProjeto/>
     </Provider>
     </header>

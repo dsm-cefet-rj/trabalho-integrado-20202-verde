@@ -25,15 +25,19 @@ function Feed (props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-      if (status === 'not_loaded' || status === 'saved' || status === 'deleted') {
-          dispatch(fetchProjetos())
-      } 
+    if (status === 'not_loaded') {
+      dispatch(fetchProjetos())
+    } else if (status === 'failed') {
+      setTimeout(() => dispatch(fetchProjetos()), 5000);
+    }
   }, [status, dispatch])
   
 
   let Feed;
+  let checkUser = ' ';
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
     Feed = <RenderPost projetos={projetos}/>;
+    checkUser = <CheckUser />;
   }else if(status === 'loading'){
     Feed = <div>Carregando Feed...</div>;
   }else if(status === 'failed'){
@@ -44,9 +48,7 @@ function Feed (props) {
           return(
             <div className = "container" id="projetos">
                <div className = "container" id="projetos">
-               <Link to = "/Novo">
-                <input type="submit" value="CRIAR PORT" name = 'salva' onClick = {() =>document.documentElement.scrollTop = 0}/>
-                </Link> 
+               {checkUser}
                {Feed}
                </div>
             </div>
@@ -86,7 +88,7 @@ function RenderPost(props){
     )
 
 }
-/*
+
 function CheckUser() {
   const [loading, setLoading] = React.useState(true);
   const [users, setUsers] = React.useState(null);
@@ -107,7 +109,6 @@ function CheckUser() {
   if (loading) {
     return (<div> Carregando... </div>)
   }
-  
   if (users){
     return (
       <Link to = "/Novo">
@@ -119,6 +120,5 @@ function CheckUser() {
     return (<div>  </div>)
   }
 }
-*/
 
 export default connect(state => ({ projetos : state }))(Feed);

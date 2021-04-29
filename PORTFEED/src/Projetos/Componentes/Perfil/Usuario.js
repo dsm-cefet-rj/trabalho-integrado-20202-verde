@@ -9,8 +9,12 @@ function Usuario(props){
 
   const status = useSelector(state => state.usuario.status);
   const error = useSelector(state => state.usuario.error);
+
   
-    
+  let { id } = useParams();
+  
+  const usuarioFound = useSelector(state => selectusuarioById(state, id));
+  console.log(usuarioFound);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,8 +30,8 @@ function Usuario(props){
   let UsuarioInfo = '';
   let checkUser = '';
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
-    UsuarioInfo = <User usuario={usuarios}/>;
-    checkUser = <CheckUser usuario={usuarios}/>;
+    UsuarioInfo = <User usuario={usuarioFound}/>;
+    checkUser = <CheckUser usuario={usuarioFound}/>;
   }else if(status === 'loading'){
     UsuarioInfo = <div>Carregando Informações Extras...</div>;
   }else if(status === 'failed'){
@@ -49,15 +53,15 @@ function User (props)
      
       <div className = "container">
          <div className="col-xs-6">
-           <img class="img2" src="https://www.construtoracesconetto.com.br/wp-content/uploads/2020/03/blank-profile-picture-973460_640.png" alt="img" height="200px" width="200px" />
+           <img class="img2" src="https://image.flaticon.com/icons/png/512/10/10938.png" alt="img" height="200px" width="200px" />
          </div>
         <div id="textousuario">
           <div class = "col-xs-6">
             <h1> 
-            {props.usuario[0].nome}</h1>
-           <div><h3>Bio:{props.usuario[0].bio}</h3></div>
+            {props.usuario.nome}</h1>
+           <div><h3>Bio:{props.usuario.bio}</h3></div>
            <div><h3> 
-                Áreas de Atuação:{props.usuario[0].areaAt}</h3></div>
+                Áreas de Atuação:{props.usuario.areaAt}</h3></div>
            </div>
          </div>
          <br />
@@ -89,10 +93,10 @@ function CheckUser(props) {
     return (<div> Carregando... </div>)
   }
   
-  if (users.name == props.usuario[0].usuario){
+  if (users.name == props.usuario.usuario){
     return (
       <div>
-       <Link to ={`/Altera/${props.usuario[0].id}`}>
+       <Link to ={`/Altera/${props.usuario.id}`}>
           <input type="submit" value="editar" name = 'Editar' onClick = {() =>document.documentElement.scrollTop = 0} />
           </Link>
       </div>

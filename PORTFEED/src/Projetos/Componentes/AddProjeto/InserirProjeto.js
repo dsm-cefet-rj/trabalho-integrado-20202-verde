@@ -27,11 +27,19 @@ import { useForm } from "react-hook-form";
 
     const [projetoOnLoad] = useState(
         id ? projetoFound ?? esquemaProjeto.cast({}): esquemaProjeto.cast({}));
-
-    const [actionType, ] = useState( 
-         projetoFound ? 'projetos/updateProjeto'
-            : 'projetos/addProjeto'
-            );
+    
+        var url = window.location.href;
+        var actionType;
+        if (url.substr(0, 26) == 'http://localhost:3000/Novo')
+        {
+            console.log('funcionoou');
+            actionType =  'projetos/addProjeto';
+        }
+        else
+        {   
+            console.log('funcionoou mas espero q n vej isso');
+            actionType =  'projetos/updateProjeto';
+        }
     
     if(actionType === 'projetos/addProjeto'){
     console.log('Teste add')
@@ -46,14 +54,11 @@ import { useForm } from "react-hook-form";
 
     function onSubmit(projeto){
         if(actionType === 'projetos/addProjeto'){
-            console.log(projeto);
-            console.log({projeto});
             dispatch(addProjetoServer(projeto));
             history.push('/Feed');
             console.log('adicionou')
         }else{
             titulo = 'Editar Projeto'
-            console.log(projetoFound.nome + ' ' + projetoFound.desc + '' + projetoFound.id)
             dispatch(updateProjetoServer({...projeto, id:projetoFound.id }));
             history.push('/Projeto/'+ id);
             console.log('atualizou')
@@ -132,7 +137,6 @@ function CheckUser()
 
         var nome;
 
-        console.log(users)
         React.useEffect(() => {
         if (!users){
         fetch("http://localhost:3004/users").then(x =>

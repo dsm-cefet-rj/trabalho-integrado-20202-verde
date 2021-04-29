@@ -30,13 +30,13 @@ function InserirPostagem(props){
             : 'postagem/addPostagem'
             );
     
-    
+    console.log(actionType);
     
     function onSubmit(postagem){
         if(actionType === 'postagem/addPostagem'){
+            console.log('adicionou');
             dispatch(addPostagemServer(postagem));
             history.push('/Feed');
-            console.log('adicionou')
         }else{
             console.log('atualizou')
             dispatch(updatePostagemServer({...postagem, id:postagemFound.id }));
@@ -48,7 +48,7 @@ function InserirPostagem(props){
 
     function cancela()
     { 
-        history.push('/User');
+        history.push('/Feed');
         document.documentElement.scrollTop = 0; 
     }
     
@@ -68,16 +68,14 @@ function InserirPostagem(props){
         <div> 
         <form onSubmit={handleSubmit(onSubmit)}>
 
-            <div class="form-group">
-            <label for="exampleFormControlTextarea1">Oque você está fazendo? Em que está trabalhando?</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
-            <input type="text" id="post" name="post"  defaultValue={postagemOnLoad.post} ref ={register}/>
-            </textarea>
-            </div>
+            
+            <label for="exampleFormControlTextarea1">O que esta pensando?</label>
+            <textarea name ='desc' class= 'txtarea' defaultValue={postagemOnLoad.post} ref ={register}/>
+        
 
             <div>
             <div class = "col-xs-6">
-            <input type="submit" value="Salvar" name = 'salva'/>
+            <input type="submit" value="Salvar" name = 'salva' />
             </div>
             <div class = "col-xs-6">
             <input type="submit" value="Cancelar" name = 'salva' onClick={cancela}/> 

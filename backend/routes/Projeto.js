@@ -3,15 +3,15 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Projetos = require('../models/projetos');
-const cors = require('./cors');
+var authenticate = require('../authenticate');
 
 router.use(bodyParser.json());
 
 
 
 router.route('/')
-.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200);})
-.get(cors.corsWithOptions, async (req, res, next) => {
+.options((req, res) => { res.sendStatus(200);})
+.get(async (req, res, next) => {
 
   try{
     const projetobd = await Projetos.find({});
@@ -26,7 +26,7 @@ router.route('/')
   
 })
 
-.post(cors.corsWithOptions, (req, res, next) => {
+.post(authenticate.verifyUser,(req, res, next) => {
 
   Projetos.create(req.body)
   .then((projetobd) => {
@@ -38,9 +38,9 @@ router.route('/')
   .catch((err) => next(err));
 })
 
+
 router.route('/:id')
-.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200);})
-.put(cors.corsWithOptions, (req, res, next) => {
+.put(authenticate.verifyUser,(req, res, next) => {
   
   Projetos.findByIdAndUpdate(req.params.id, {
     $set: req.body
@@ -53,7 +53,18 @@ router.route('/:id')
   .catch((err) => next(err));
 
 })
-.get(cors.corsWithOptions, (req, res, next) => {
+.delete(authenticate.verifyUser,(req, res, next) => {
+  
+  Projetos.findByIdAndRemove(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp.id);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+
+})
+.get((req, res, next) => {
   
   Projetos.findById(req.params.id)
     .then((resp) => {
@@ -65,16 +76,6 @@ router.route('/:id')
 
 })
 
-.delete(cors.corsWithOptions, (req, res, next) => {
-  
-  Projetos.findByIdAndRemove(req.params.id)
-    .then((resp) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(resp.id);
-    }, (err) => next(err))
-    .catch((err) => next(err));
 
-})
 
 module.exports = router;

@@ -12,14 +12,34 @@
     padding: 5px;
     flex: 33.33%;
     margin: 15px;
+    border-style:ridge;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 img{
   width:100%;
   height:100%; 
 }
-post{
-  width: 250px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.post{
+  flex: 33.33%;
+  margin: 15px;
+  border-style:ridge;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  font-size: large;
+  
+}
+.titulo{
   text-align: center;
+}
+.button {
+  transition-duration: 0.4s;
+  float: left;
+}
+
+.button:hover {
+  background-color: darkred; 
+  color: white;
+}
+h1{
+  padding: 0px;
+  font-size:x-large;
 }

@@ -8,9 +8,9 @@ import store from './Projetos/Componentes/store/GuardaProjeto.js'
 
 function AdicionaProjeto() {
   return (
-    <header> 
+    <header>
+    <Provider store = {store}> 
     <Head/>
-    <Provider store = {store}>
     <AddProjeto/>
     </Provider>
     </header>

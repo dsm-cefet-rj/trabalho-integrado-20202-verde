@@ -1,31 +1,34 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
 //import {Urlbase} from 'C:/Users/Eduardo//Documents/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Urlbase.js'
 import {httpGet, httpPut, httpPost, httpDelete} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Utils'
+import store from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Projetos/Componentes/store/GuardaUser'
 
 const Urlbase = 'http://localhost:3004';
 
 const projetosAdapter = createEntityAdapter();
+
+
 
 const salvaProjetos = projetosAdapter.getInitialState({
     status: 'not_loaded',
     error: null
 });
 
-export const fetchProjetos = createAsyncThunk('Projeto/fetchProjetos', async () => {
+export const fetchProjetos = createAsyncThunk('Projeto/fetchProjetos', async (_, {getState}) => {
     return await httpGet(`${Urlbase}/projetos`);
 });
 
-export const deleteProjetoServer = createAsyncThunk('projetos/deleteProjetoServer', async (idProjeto) => {
-    await httpDelete(`${Urlbase}/projetos/${idProjeto}`);
+export const deleteProjetoServer = createAsyncThunk('projetos/deleteProjetoServer', async (idProjeto, {getState}) => {
+    await httpDelete(`${Urlbase}/projetos/${idProjeto}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idProjeto;
 });
 
-export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer', async (project) => {
-    return await httpPut(`${Urlbase}/projetos/${project.id}`, project);
+export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer', async (project, {getState}) => {
+    return await httpPut(`${Urlbase}/projetos/${project.id}`, project, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const addProjetoServer = createAsyncThunk('projetos/addProjetoServer', async (project, {getState}) => {
-    return await httpPost(`${Urlbase}/projetos`, project)
+    return await httpPost(`${Urlbase}/projetos`, project, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}})
 });
 export const sliceProjeto = createSlice({
     name: 'projetos',

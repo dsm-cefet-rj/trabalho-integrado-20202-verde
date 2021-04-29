@@ -3,14 +3,15 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 const Postagem = require('../models/postagem');
 const cors = require('./cors');
+var authenticate = require('../authenticate');
 
 router.use(bodyParser.json());
 
 
 
 router.route('/')
-.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200);})
-.get(cors.corsWithOptions, async (req, res, next) => {
+.options((req, res) => { res.sendStatus(200);})
+.get( async (req, res, next) => {
 
   try{
     const postbd = await Postagem.find({});
@@ -25,7 +26,7 @@ router.route('/')
   
 })
 
-.post(cors.corsWithOptions, (req, res, next) => {
+.post((req, res, next) => {
 
   Postagem.create(req.body)
   .then((postbd) => {
@@ -38,7 +39,7 @@ router.route('/')
 })
 
 router.route('/:id')
-.put(cors.corsWithOptions, (req, res, next) => {
+.put((req, res, next) => {
   
   Postagem.findByIdAndUpdate(req.params.id, {
     $set: req.body
@@ -51,7 +52,7 @@ router.route('/:id')
   .catch((err) => next(err));
 
 })
-.get(cors.corsWithOptions, (req, res, next) => {
+.get((req, res, next) => {
   
   Postagem.findById(req.params.id)
     .then((resp) => {
@@ -63,7 +64,7 @@ router.route('/:id')
 
 })
 
-.delete(cors.corsWithOptions, (req, res, next) => {
+.delete((req, res, next) => {
   
   Postagem.findByIdAndRemove(req.params.id)
     .then((resp) => {

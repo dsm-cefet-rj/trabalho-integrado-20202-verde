@@ -20,12 +20,12 @@ export const deletePostagemServer = createAsyncThunk('projetos/deletePostagemSer
     return idPostagem;
 });
 
-export const updatePostagemServer = createAsyncThunk('Projeto/updatePostagemServer', async (postagem) => {
-    return await httpPut(`${Urlbase}/postagem/${postagem.id}`, postagem);
+export const updatePostagemServer = createAsyncThunk('Projeto/updatePostagemServer', async (postagem, {getState}) => {
+    return await httpPut(`${Urlbase}/postagem/${postagem.id}`);
 });
 
 export const addPostagemServer = createAsyncThunk('projetos/addPostagemServer', async (postagem, {getState}) => {
-    return await httpPost(`${Urlbase}/postagem`, postagem)
+    return await httpPost(`${Urlbase}/postagem`, postagem);
 });
 export const slicePostagem = createSlice({
     name: 'postagem',
