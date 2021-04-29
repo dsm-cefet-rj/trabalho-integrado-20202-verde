@@ -74,9 +74,10 @@ function Feed (props) {
   }
 function RenderPost(props){    
     props.projetos.reverse();
+    var favorito = props.projetos.filter((projetos) => projetos.favorito === true);
     return(
       <div className = "container" id="projetos">
-        {props.projetos.map((port) => <Proj key={port.id} port={port}/>)}
+        {favorito.map((port) => <Proj key={port.id} port={port}/>)}
         </div>
       
     )
