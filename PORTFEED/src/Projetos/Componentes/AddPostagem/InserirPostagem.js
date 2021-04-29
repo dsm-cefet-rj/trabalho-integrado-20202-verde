@@ -8,14 +8,11 @@ import { useForm } from "react-hook-form";
     
 function InserirPostagem(props){
 
-    const postagem = useSelector(selectAllPostagem)
-
     const history = useHistory();
     const dispatch = useDispatch()
 
-    let { id } = useParams();
+    let {id} = useParams();
     
-
     const postagemFound = useSelector(state => selectPostagemById(state, id))
 
     const { register, handleSubmit, errors } = useForm({
@@ -26,34 +23,33 @@ function InserirPostagem(props){
         id ? postagemFound ?? esquemaPostagem.cast({}): esquemaPostagem.cast({}));
 
     const [actionType, ] = useState( 
-         postagemFound ? 'postagem/updatePostagem'
+        postagemFound ? 'postagem/updatePostagem'
             : 'postagem/addPostagem'
-            );
+          );
     
     console.log(actionType);
     
     function onSubmit(postagem){
         if(actionType === 'postagem/addPostagem'){
-            console.log('adicionou');
+            console.log('adicionou')
             dispatch(addPostagemServer(postagem));
-            history.push('/Feed');
         }else{
             console.log('atualizou')
-            dispatch(updatePostagemServer({...postagem, id:postagemFound.id }));
-            history.push('/Postagem/'+ id );
+            dispatch(updatePostagemServer({...postagem, id: postagemFound.id }));
             dispatch(fetchPostagem())
         }
         document.documentElement.scrollTop = 0; 
+        history.push('/FeedPost');
     }
 
     function cancela()
     { 
-        history.push('/Feed');
+        history.push('/FeedPost');
         document.documentElement.scrollTop = 0; 
     }
     
     var titulo;
-    if(actionType === 'projetos/addPostagem')
+    if(actionType === 'postagem/addPostagem')
     {
         titulo = 'Faça seu Post'
     }
@@ -65,19 +61,29 @@ function InserirPostagem(props){
 
 
     return(
-        <div> 
+        <div className = "container">
+        <h1>{titulo}</h1> 
         <form onSubmit={handleSubmit(onSubmit)}>
 
-            
-            <label for="exampleFormControlTextarea1">O que esta pensando?</label>
-            <textarea name ='desc' class= 'txtarea' defaultValue={postagemOnLoad.post} ref ={register}/>
-        
-
+            <div className="form-group">
+            <label>
+                Oque você está fazendo? Em que está trabalhando?
+            </label>
             <div>
-            <div class = "col-xs-6">
-            <input type="submit" value="Salvar" name = 'salva' />
+            <label>
+            <div className = "container">
+            <input type="text" className= 'txtbox' id="post" name="post"  defaultValue={postagemOnLoad.post} ref ={register}/>
             </div>
-            <div class = "col-xs-6">
+            </label>
+            
+            </div>
+            </div>
+            <div>
+            <div className = "col-xs-3">
+            <input type="submit" value="Salvar" name = 'salva'/>
+
+            </div>
+            <div className = "col-xs-3">
             <input type="submit" value="Cancelar" name = 'salva' onClick={cancela}/> 
             </div>
             </div>

@@ -1,8 +1,14 @@
+/*
 import React, { useState } from 'react';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { updateusuarioServer, fetchUsuario, addusuarioServer, selectAllusuario, selectusuarioById } from './SlicePerfil'
 import { esquemaPerfil } from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Projetos/esquemaPerfil.js';
+*/
+import React, {useState} from 'react';
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, connect, useSelector } from 'react-redux';
+import { updateusuarioServer,fetchUsuario,addusuarioServer, selectAllusuario, selectusuarioById} from './SlicePerfil'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 

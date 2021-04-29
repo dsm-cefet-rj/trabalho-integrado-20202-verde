@@ -11,17 +11,21 @@ const postagemAdapter = createEntityAdapter();
     error: null
 });
 
-export const fetchPostagem = createAsyncThunk('Projeto/fetchPostagem', async () => {
+export const fetchPostagem = createAsyncThunk('Postagem/fetchPostagem', async () => {
     return await httpGet(`${Urlbase}/postagem`);
 });
 
-export const deletePostagemServer = createAsyncThunk('projetos/deletePostagemServer', async (idPostagem) => {
+export const deletePostagemServer = createAsyncThunk('postagem/deletePostagemServer', async (idPostagem) => {
     await httpDelete(`${Urlbase}/postagem/${idPostagem}`);
     return idPostagem;
 });
-
+/*
+<<<<<<< Updated upstream
 export const updatePostagemServer = createAsyncThunk('Projeto/updatePostagemServer', async (postagem, {getState}) => {
     return await httpPut(`${Urlbase}/postagem/${postagem.id}`);
+======= */
+export const updatePostagemServer = createAsyncThunk('Postagem/updatePostagemServer', async (postagem) => {
+    return await httpPut(`${Urlbase}/postagem/${postagem.id}`, postagem);
 });
 
 export const addPostagemServer = createAsyncThunk('projetos/addPostagemServer', async (postagem, {getState}) => {

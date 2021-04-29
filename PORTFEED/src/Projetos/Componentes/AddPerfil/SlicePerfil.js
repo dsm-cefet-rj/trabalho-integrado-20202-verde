@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
 //import {Urlbase} from 'C:/Users/Eduardo//Documents/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Urlbase.js'
-import {httpGet, httpPut, httpPost, httpDelete} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Utils.js'
+import {httpGet, httpPut, httpPost, httpDelete} from 'C:/Users/Eduardo/Documents/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Utils'
 
 const Urlbase = 'http://localhost:3004';
 
