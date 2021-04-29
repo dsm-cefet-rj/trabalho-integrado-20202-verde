@@ -3,13 +3,15 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Projetos = require('../models/projetos');
+const cors = require('./cors');
 
 router.use(bodyParser.json());
 
 
 
 router.route('/')
-.get(async (req, res, next) => {
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200);})
+.get(cors.corsWithOptions, async (req, res, next) => {
 
   try{
     const projetobd = await Projetos.find({});
@@ -24,7 +26,7 @@ router.route('/')
   
 })
 
-.post((req, res, next) => {
+.post(cors.corsWithOptions, (req, res, next) => {
 
   Projetos.create(req.body)
   .then((projetobd) => {
@@ -37,7 +39,8 @@ router.route('/')
 })
 
 router.route('/:id')
-.put((req, res, next) => {
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200);})
+.put(cors.corsWithOptions, (req, res, next) => {
   
   Projetos.findByIdAndUpdate(req.params.id, {
     $set: req.body
@@ -50,7 +53,7 @@ router.route('/:id')
   .catch((err) => next(err));
 
 })
-.get((req, res, next) => {
+.get(cors.corsWithOptions, (req, res, next) => {
   
   Projetos.findById(req.params.id)
     .then((resp) => {
@@ -62,7 +65,7 @@ router.route('/:id')
 
 })
 
-.delete((req, res, next) => {
+.delete(cors.corsWithOptions, (req, res, next) => {
   
   Projetos.findByIdAndRemove(req.params.id)
     .then((resp) => {
