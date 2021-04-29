@@ -53,8 +53,6 @@ function Feed_Postagem (props) {
                </div>
             </div>
           );
-      
-  
   }
   
   function Post (props){  
@@ -63,16 +61,26 @@ function Feed_Postagem (props) {
       dispatch(deletePostagemServer(ident));
     }
     return(
-      <div className="li">
+        <div className="li">
+
+        <div className="post">
+        <h1>Nome do Usuario</h1>
         <div className="caixa">
-        <div class="col-12 col-md-10">{props.post.post}</div>
-        <div class="col-6 col-md-1">
-        <Link to={`/EditaPost/${props.post.id}`}>
-          <input type="submit" value="Editar" name='salva' onClick={() => document.documentElement.scrollTop = 0} />
+        <p> {props.post.post} </p>
+        </div>
+        <div className="barra">
+        <div className="col-xs-6">
+          <Link to={`/EditaPost/${props.post.id}`}>
+          <button className="button" onClick={() => document.documentElement.scrollTop = 0}>
+           Editar 
+          </button>
           </Link>
         </div>
-        <div class="col-6 col-md-1"> 
-        <input type="submit" value="Remover" name='deleta' onClick={() => handleClickExcluirPostagem(props.post.id)} /> 
+        <div className="col-xs-6"> 
+          <button className="button" onClick={() => handleClickExcluirPostagem(props.post.id)}>
+           Delete
+          </button> 
+        </div>
         </div>
         </div>
         </div>

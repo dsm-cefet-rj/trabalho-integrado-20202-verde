@@ -24,6 +24,7 @@ function Feed (props) {
   const error = useSelector(state => state.projetos.error);  
   const dispatch = useDispatch()
 
+  
   useEffect(() => {
       if (status === 'not_loaded' || status === 'saved' || status === 'deleted') {
           dispatch(fetchProjetos())
@@ -56,18 +57,24 @@ function Feed (props) {
   }
   
   function Proj (props){  
-
+/*
+    function changeValue() {
+      console.log(props.port.favorito)
+      props.port.favorito = !(props.port.favorito);
+      console.log(props.port.favorito)
+  }
+*/
     return(
       <div className="li">
         <div className="caixa" >
-        <div className="col-xs-4">
+        <div className="titulo">
          <p> {props.port.nome} </p>
          </div>
         <Link to = {`/Projeto/${props.port.id}`}>
          <img className="img-responsive" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU"  alt= "P2"  onClick = {() =>document.documentElement.scrollTop = 0}/>  
          </Link>
           <div className="col-xs-6">
-            <button className="button" onClick={() => props.post.favorito = !props.post.favorito}> 
+            <button className="button" onClick={() => props.port.favorito === !props.port.favorito}> 
               Favoritar
             </button>
           </div>
