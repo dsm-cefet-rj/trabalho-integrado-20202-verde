@@ -1,16 +1,11 @@
-/*
 import React, { useState } from 'react';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { updateusuarioServer, fetchUsuario, addusuarioServer, selectAllusuario, selectusuarioById } from './SlicePerfil'
 import { esquemaPerfil } from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Projetos/esquemaPerfil.js';
-*/
-import React, {useState} from 'react';
-import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, connect, useSelector } from 'react-redux';
-import { updateusuarioServer,fetchUsuario,addusuarioServer, selectAllusuario, selectusuarioById} from './SlicePerfil'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
+import store from '../store/GuardaProjeto';
 
 function InserirPerfil(props) {
 
@@ -122,19 +117,7 @@ function CheckUser() {
 
     var nome;
 
-    console.log(users)
-    React.useEffect(() => {
-        if (!users) {
-            fetch("http://localhost:3004/users").then(x =>
-                x.json().then(y => {
-                    setUsers(y.name);
-                })
-            );
-        }
-
-    }, [users, dispatch]);
-
-    return (users)
+    return (store.getState().logins.user)
 }
 
 export default (InserirPerfil)

@@ -30,11 +30,10 @@ function UserForm(props){
             setTimeout(() => {
                 dispatch(loginServer(user));
                 setTimeout(() => { history.push('/Cria');},100);
-            }, 400);
+            }, 500);
         }else
         {
             dispatch(loginServer(user));
-            fetch("http://localhost:3004/users");
             setTimeout(() => {
                 history.push('/');
             }, 500);
@@ -52,7 +51,7 @@ function UserForm(props){
             <div class = "col-xs-12">
             <label > Usuário:
                   <br/>
-                  <input type="text" id="name" name="username" ref ={register}/>
+                  <input type="text" id="name" name="username" class = "username" ref ={register}/>
             </label>
             </div>
             <br/>
@@ -60,7 +59,7 @@ function UserForm(props){
             <div class = "col-xs-12">
             <label > Senha:
                   <br/>
-                  <input type="password" id="name" name="password" ref ={register}/>
+                  <input type="password" id="name" name="password" class = "password" ref ={register}/>
             </label>
             </div>
             <br/>

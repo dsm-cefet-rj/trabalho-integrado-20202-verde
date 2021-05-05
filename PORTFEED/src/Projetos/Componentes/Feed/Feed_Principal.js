@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom"
 import {useSelector, connect, useDispatch} from 'react-redux';
 import {fetchProjetos, selectAllProjetos, selectProjetosById} from '../AddProjeto/SliceProjeto.js'
 import './Feed.css';
-
+import store from '../store/GuardaProjeto';
 /*
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
@@ -86,7 +86,6 @@ function Feed (props) {
 
   }
 function RenderPost(props){    
-    props.projetos.reverse();
     return(
       <div className = "container" id="projetos">
         {props.projetos.map((port) => <Proj key={port.id} port={port}/>)}
@@ -101,22 +100,7 @@ function CheckUser() {
   const [users, setUsers] = React.useState(null);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (!users){
-    fetch("http://localhost:3004/users").then(x =>
-      x.json().then(y => {
-        setUsers(y.name);
-        setLoading(false);
-      })
-    );
-  }
-  
-  }, [users,dispatch]);
-
-  if (loading) {
-    return (<div> Carregando... </div>)
-  }
-  if (users){
+  if (store.getState().logins.user){
     return (
       <Link to = "/Novo">
       <input type="submit" value="CRIAR NOVO" name = 'salva' onClick = {() =>document.documentElement.scrollTop = 0}/>

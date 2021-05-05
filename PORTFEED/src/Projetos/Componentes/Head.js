@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom"
 import { useDispatch } from 'react-redux';
+import store from './store/GuardaProjeto';
 
 //Projeto para o cabeçalho e barra de pesquisa
 function Head (){
@@ -10,27 +11,13 @@ function Head (){
     const [users, setUsers] = React.useState(null);
   
     const dispatch = useDispatch();
-  
-    React.useEffect(() => {
-      if (!users){
-      fetch("http://localhost:3004/users").then(x =>
-        x.json().then(y => {
-          setUsers(y);
-          setLoading(false);
-        })
-      );
-    }
-    
-    }, [users,dispatch]);
-  
-    if (loading) {
-      return (<div> Carregando... </div>)
-    }
-    if (users.name != null){
+    console.log(store.getState().logins.user);
+
+    if (store.getState().logins.user != null){
       return (
         <div className = "col-xs-2">
             
-                <label> Ola {users.name} </label>
+                <label> Ola {store.getState().logins.user} </label>
             </div>
       )
     }

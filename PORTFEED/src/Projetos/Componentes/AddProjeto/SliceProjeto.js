@@ -15,7 +15,7 @@ const projetosAdapter = createEntityAdapter();
 });
 
 export const fetchProjetos = createAsyncThunk('Projeto/fetchProjetos', async (_, {getState}) => {
-    return await httpGet(`${Urlbase}/projetos`);
+    return await httpGet(`/projetos`);
 });
 
 export const deleteProjetoServer = createAsyncThunk('projetos/deleteProjetoServer', async (idProjeto, {getState}) => {

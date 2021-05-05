@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom"
 import { useSelector, connect, useDispatch } from 'react-redux';
 import { fetchProjetos, selectAllProjetos, selectProjetosById, deleteProjetoServer } from '../AddProjeto/SliceProjeto.js'
+import store from '../store/GuardaProjeto';
 //Projeto para o cabeçalho e barra de pesquisa
 function Baixo(props) {
 
@@ -89,27 +90,12 @@ function CheckUser(props) {
     dispatch(deleteProjetoServer(ident));
   }
 
-  React.useEffect(() => {
-    if (!users){
-    fetch("http://localhost:3004/users").then(x =>
-      x.json().then(y => {
-        setUsers(y);
-        setLoading(false);
-      })
-    );
-  }
-  
-  }, [users,dispatch]);
 
   function edita() {
     document.documentElement.scrollTop = 0
   }
 
-  if (loading) {
-    return (<div> Carregando... </div>)
-  }
-  
-  if (users.name == props.projetos.usuario){
+  if (store.getState().logins.user == props.projetos.usuario){
     return (
       <div>
         <div class="col-xs-6">

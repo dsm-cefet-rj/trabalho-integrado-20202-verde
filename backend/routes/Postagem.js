@@ -26,7 +26,7 @@ router.route('/')
   
 })
 
-.post((req, res, next) => {
+.post(authenticate.verifyUser,(req, res, next) => {
 
   Postagem.create(req.body)
   .then((postbd) => {
@@ -39,7 +39,7 @@ router.route('/')
 })
 
 router.route('/:id')
-.put((req, res, next) => {
+.put(authenticate.verifyUser,(req, res, next) => {
   
   Postagem.findByIdAndUpdate(req.params.id, {
     $set: req.body
@@ -52,7 +52,7 @@ router.route('/:id')
   .catch((err) => next(err));
 
 })
-.get((req, res, next) => {
+.get(authenticate.verifyUser,(req, res, next) => {
   
   Postagem.findById(req.params.id)
     .then((resp) => {
@@ -64,7 +64,7 @@ router.route('/:id')
 
 })
 
-.delete((req, res, next) => {
+.delete(authenticate.verifyUser,(req, res, next) => {
   
   Postagem.findByIdAndRemove(req.params.id)
     .then((resp) => {

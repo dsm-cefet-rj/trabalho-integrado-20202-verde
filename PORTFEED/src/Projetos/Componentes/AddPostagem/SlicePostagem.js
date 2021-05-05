@@ -11,25 +11,21 @@ const postagemAdapter = createEntityAdapter();
     error: null
 });
 
-export const fetchPostagem = createAsyncThunk('Postagem/fetchPostagem', async () => {
-    return await httpGet(`${Urlbase}/postagem`);
+export const fetchPostagem = createAsyncThunk('Projeto/fetchPostagem', async () => {
+    return await httpGet(`/postagem`);
 });
 
-export const deletePostagemServer = createAsyncThunk('postagem/deletePostagemServer', async (idPostagem) => {
-    await httpDelete(`${Urlbase}/postagem/${idPostagem}`);
+export const deletePostagemServer = createAsyncThunk('projetos/deletePostagemServer', async (idPostagem) => {
+    await httpDelete(`/postagem/${idPostagem}`);
     return idPostagem;
 });
-/*
-<<<<<<< Updated upstream
+
 export const updatePostagemServer = createAsyncThunk('Projeto/updatePostagemServer', async (postagem, {getState}) => {
-    return await httpPut(`${Urlbase}/postagem/${postagem.id}`);
-======= */
-export const updatePostagemServer = createAsyncThunk('Postagem/updatePostagemServer', async (postagem) => {
-    return await httpPut(`${Urlbase}/postagem/${postagem.id}`, postagem);
+    return await httpPut(`/postagem/${postagem.id}`);
 });
 
 export const addPostagemServer = createAsyncThunk('projetos/addPostagemServer', async (postagem, {getState}) => {
-    return await httpPost(`${Urlbase}/postagem`, postagem);
+    return await httpPost(`/postagem`, postagem);
 });
 export const slicePostagem = createSlice({
     name: 'postagem',
