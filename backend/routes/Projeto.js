@@ -30,7 +30,6 @@ router.route('/')
 
   Projetos.create(req.body)
   .then((projetobd) => {
-      console.log('Projeto criado ', projetobd);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(projetobd);
@@ -40,6 +39,17 @@ router.route('/')
 
 
 router.route('/:id')
+.get((req, res, next) => {
+  
+  Projetos.findById(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+
+})
 .put(authenticate.verifyUser,(req, res, next) => {
   
   Projetos.findByIdAndUpdate(req.params.id, {
@@ -54,27 +64,16 @@ router.route('/:id')
 
 })
 .delete(authenticate.verifyUser,(req, res, next) => {
-  
   Projetos.findByIdAndRemove(req.params.id)
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(resp.id);
+        res.json(req.params.id);
     }, (err) => next(err))
     .catch((err) => next(err));
 
 })
-.get((req, res, next) => {
-  
-  Projetos.findById(req.params.id)
-    .then((resp) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(resp);
-    }, (err) => next(err))
-    .catch((err) => next(err));
 
-})
 
 
 

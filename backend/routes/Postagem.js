@@ -70,7 +70,7 @@ router.route('/:id')
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(resp.id);
+        res.json(req.params.id);
     }, (err) => next(err))
     .catch((err) => next(err));
 
