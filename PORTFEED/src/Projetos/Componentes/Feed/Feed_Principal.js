@@ -41,6 +41,8 @@ function Feed (props) {
     checkUser = <CheckUser />;
   }else if(status === 'loading'){
     Feed = <div>Carregando Feed...</div>;
+  }else if(status === 'not_loaded'){
+    Feed = '';
   }else if(status === 'failed'){
     Feed = <div>Error: {error}</div>;
   }
@@ -86,9 +88,10 @@ function Feed (props) {
 
   }
 function RenderPost(props){    
+    var projetos = props.projetos.reverse();
     return(
       <div className = "container" id="projetos">
-        {props.projetos.map((port) => <Proj key={port.id} port={port}/>)}
+        {projetos.map((port) => <Proj key={port.id} port={port}/>)}
         </div>
       
     )
