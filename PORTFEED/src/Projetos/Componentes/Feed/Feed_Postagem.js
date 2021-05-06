@@ -24,11 +24,12 @@ function Feed_Postagem (props) {
   const error = useSelector(state => state.postagem.error);  
   const dispatch = useDispatch()
   
-
   useEffect(() => {
-      if (status === 'not_loaded' || status === 'saved' || status === 'deleted') {
-          dispatch(fetchPostagem())
-      } 
+    if (status === 'not_loaded') {
+      dispatch(fetchPostagem())
+    } else if (status === 'failed') {
+      setTimeout(() => dispatch(fetchPostagem()), 5000);
+    }
   }, [status, dispatch])
   
 

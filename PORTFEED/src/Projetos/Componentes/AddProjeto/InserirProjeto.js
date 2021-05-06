@@ -81,7 +81,7 @@ import store from '../store/GuardaProjeto';
             <label for="username"> Nome do Projeto:
             <span> {errors.nome?.message}</span>
                   <br/>
-                  <input type="text" id="name" name="nome"  defaultValue={projetoOnLoad.nome} ref ={register}/>
+                  <input type="text" id="name" name="nome" class= 'nome_projeto'  defaultValue={projetoOnLoad.nome} ref ={register}/>
             </label>
             </div>
             <br/>
@@ -91,7 +91,7 @@ import store from '../store/GuardaProjeto';
                     Descrição do Projeto: 
                     <span> {errors.desc?.message}</span>
                     <br/>
-                    <textarea name ='desc' class= 'txtarea' defaultValue={projetoOnLoad.desc} ref ={register}/>
+                    <textarea name ='desc' class= 'txtarea desc_projeto' defaultValue={projetoOnLoad.desc} ref ={register}/>
                 </label>
             </div>
             <br/>
@@ -104,7 +104,7 @@ import store from '../store/GuardaProjeto';
             <label for="username"> Informações Extras:
             <span> {errors.info?.message}</span>
                   <br/>
-                  <input type="text" class= 'txtbox' id="name" name="info"   defaultValue={projetoOnLoad.info} ref ={register}/>
+                  <input type="text" class= 'txtbox info_projeto' id="name" name="info"   defaultValue={projetoOnLoad.info} ref ={register}/>
                   
             </label>
             </div>

@@ -11,21 +11,21 @@ const postagemAdapter = createEntityAdapter();
     error: null
 });
 
-export const fetchPostagem = createAsyncThunk('Projeto/fetchPostagem', async () => {
+export const fetchPostagem = createAsyncThunk('Postagem/fetchPostagem', async () => {
     return await httpGet(`/postagem`);
 });
 
-export const deletePostagemServer = createAsyncThunk('projetos/deletePostagemServer', async (idPostagem) => {
+export const deletePostagemServer = createAsyncThunk('Postagem/deletePostagemServer', async (idPostagem, {getState}) => {
     await httpDelete(`/postagem/${idPostagem}`);
     return idPostagem;
 });
 
-export const updatePostagemServer = createAsyncThunk('Projeto/updatePostagemServer', async (postagem, {getState}) => {
-    return await httpPut(`/postagem/${postagem.id}`);
+export const updatePostagemServer = createAsyncThunk('Postagem/updatePostagemServer', async (postagem, {getState}) => {
+    return await httpPut(`/postagem/${postagem.id}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const addPostagemServer = createAsyncThunk('projetos/addPostagemServer', async (postagem, {getState}) => {
-    return await httpPost(`/postagem`, postagem);
+export const addPostagemServer = createAsyncThunk('Postagem/addPostagemServer', async (postagem, {getState}) => {
+    return await httpPost(`/postagem`, postagem, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 export const slicePostagem = createSlice({
     name: 'postagem',

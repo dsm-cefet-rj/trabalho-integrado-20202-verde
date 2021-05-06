@@ -19,16 +19,16 @@ export const fetchProjetos = createAsyncThunk('Projeto/fetchProjetos', async (_,
 });
 
 export const deleteProjetoServer = createAsyncThunk('projetos/deleteProjetoServer', async (idProjeto, {getState}) => {
-    await httpDelete(`${Urlbase}/projetos/${idProjeto}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    await httpDelete(`/projetos/${idProjeto}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idProjeto;
 });
 
 export const updateProjetoServer = createAsyncThunk('Projeto/updateProjetoServer', async (project, {getState}) => {
-    return await httpPut(`${Urlbase}/projetos/${project.id}`, project, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    return await httpPut(`/projetos/${project.id}`, project, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const addProjetoServer = createAsyncThunk('projetos/addProjetoServer', async (project, {getState}) => {
-    return await httpPost(`${Urlbase}/projetos`, project, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}})
+    return await httpPost(`/projetos`, project, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}})
 });
 export const sliceProjeto = createSlice({
     name: 'projetos',

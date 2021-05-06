@@ -69,7 +69,7 @@ function InserirPerfil(props) {
                 <label > Nome do usuario:
             <span> {errors.nome?.message}</span>
                     <br />
-                    <input type="text" id="name" name="nome" defaultValue={usuarioOnLoad.nome} ref={register} />
+                    <input type="text" id="name" name="nome" class = "nome_perfil" defaultValue={usuarioOnLoad.nome} ref={register} />
                 </label>
             </div>
             <br />
@@ -78,7 +78,7 @@ function InserirPerfil(props) {
                 <label > Bio:
             <span> {errors.bio?.message}</span>
                     <br />
-                    <input type="text" class='txtbox' id="name" name="bio" defaultValue={usuarioOnLoad.bio} ref={register} />
+                    <input type="text" class='txtbox bio_perfil' id="name" name="bio" defaultValue={usuarioOnLoad.bio} ref={register} />
                 </label>
             </div>
             <br />
@@ -86,7 +86,7 @@ function InserirPerfil(props) {
                 <label> Áreas de Atuação:
             <span> {errors.areaAt?.message}</span>
                     <br />
-                    <input type="text" class='txtbox' id="name" name="areaAt" defaultValue={usuarioOnLoad.areaAt} ref={register} />
+                    <input type="text" class='txtbox areaAt_perfil' id="name" name="areaAt" defaultValue={usuarioOnLoad.areaAt} ref={register} />
 
                 </label>
             </div>
