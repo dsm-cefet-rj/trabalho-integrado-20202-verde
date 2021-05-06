@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -22,18 +22,20 @@ const { start } = require('repl');
 
 const url =  config.mongoUrl;
 const connect = mongoose.connect(url);
-const swaggerUi = require('swagger-ui-express')
-const swaggerFile = require('./swagger_output.json')
+const app       = express();
+const swaggerUi = require('express-swaggerize-ui');
 
-express.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+app.use('./swagger_output.json', function (req, res) {
+  res.json(require('./swagger_output.json'));
+});
+app.use('/api-docs', swaggerUi());
 
-require('./endpoints')(express)
+app.listen(3000);
+
 
 connect.then((db) => {
   console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
-
-var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
