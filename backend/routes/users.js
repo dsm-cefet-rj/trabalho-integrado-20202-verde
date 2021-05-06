@@ -36,7 +36,7 @@ router.post('/signup', (req, res, next) => {
             res.statusCode = 500;
             res.setHeader('Content-Type', 'application/json');
             res.json({err: err});
-            console('um');
+          
         } else {
             passport.authenticate('local')(req, res, () => {
                 res.statusCode = 200;

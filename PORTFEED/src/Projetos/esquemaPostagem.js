@@ -7,7 +7,7 @@ export let esquemaPostagem = object().shape(
     {
         id: string(),
         post: string().required().max(200),
-        
+        usuario: string(),
         
     }
 )

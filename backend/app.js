@@ -1,10 +1,13 @@
-const express = require('express');
+var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var passport = require('passport');
+
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 
 var authenticate = require('./authenticate');
 
@@ -22,20 +25,15 @@ const { start } = require('repl');
 
 const url =  config.mongoUrl;
 const connect = mongoose.connect(url);
-const app       = express();
-const swaggerUi = require('express-swaggerize-ui');
 
-app.use('./swagger_output.json', function (req, res) {
-  res.json(require('./swagger_output.json'));
-});
-app.use('/api-docs', swaggerUi());
-
-app.listen(3000);
+const app = express();
 
 
 connect.then((db) => {
   console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
+
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.use(logger('dev'));
 app.use(express.json());

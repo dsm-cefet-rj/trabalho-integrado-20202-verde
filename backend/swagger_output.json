@@ -2,19 +2,93 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "PortFeed",
+    "description": "API PORTFEED, rede social de portfólios."
   },
   "host": "localhost:3000",
   "basePath": "/",
-  "tags": [],
+  "tags": [
+    {
+      "name": "Projeto",
+      "description": "Rota para entidade projeto. Cuida dos projetos de um user"
+    },
+    {
+      "name": "Postagem",
+      "description": "Rota para entidade postagem. Cuida dos posts que um user faz"
+    },
+    {
+      "name": "Usuario",
+      "description": "Rota para entidade usuario. Cuida do perfil"
+    }
+  ],
   "schemes": [
     "http"
   ],
-  "consumes": [],
-  "produces": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/": {
+    "/users/": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users/logout": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/projetos/": {
       "get": {
         "tags": [],
         "description": "",
@@ -40,7 +114,153 @@
         "responses": {}
       }
     },
-    "/{id}": {
+    "/projetos/{id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/postagem/": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      },
+      "options": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/postagem/{id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/usuario/": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/usuario/{id}": {
       "get": {
         "tags": [],
         "description": "",
@@ -91,5 +311,68 @@
       }
     }
   },
-  "definitions": {}
+  "definitions": {
+    "Projeto": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Projeto1"
+          },
+          "desc": {
+            "type": "string",
+            "example": "Primeiro Projeto"
+          },
+          "info": {
+            "type": "string",
+            "example": "Olá mundo"
+          },
+          "id": {
+            "type": "string",
+            "example": "60942851c1af0e0c8c02ce0f"
+          },
+          "usuario": {
+            "type": "string",
+            "example": "Duds12345"
+          }
+        }
+      }
+    },
+    "Postagem": {
+      "type": "object",
+      "properties": {
+        "post": {
+          "type": "string",
+          "example": "Manda post"
+        },
+        "id": {
+          "type": "string",
+          "example": "60944a780b4bf75c240f5865"
+        }
+      }
+    },
+    "Usuario": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Perfil1"
+        },
+        "bio": {
+          "type": "string",
+          "example": "Gosto de Macarrão"
+        },
+        "areaAt": {
+          "type": "string",
+          "example": "Computação"
+        },
+        "id": {
+          "type": "string",
+          "example": "60941f25c1af0e0c8c02cdff"
+        }
+      }
+    }
+  }
 }
