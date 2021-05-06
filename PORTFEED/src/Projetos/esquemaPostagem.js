@@ -6,7 +6,7 @@ setLocale(ptForm)
 export let esquemaPostagem = object().shape(
     {
         id: string(),
-        post: string().required().max(400),
+        post: string().required().max(200),
         
         
     }

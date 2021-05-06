@@ -12,7 +12,8 @@
     "react-dom": "^16.12.0",
     "react-hook-form": "^6.15.5",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^4.0.3",
+    "swagger-ui-express": "^4.1.6",
     "yup": "^0.32.9",
     "yup-locale-pt": "^0.0.8"
   },
@@ -21,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "json-server":"json-server --watch shared/projetos.json --port 3004"
+    "json-server": "json-server --watch shared/projetos.json --port 3004"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,5 +38,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "express-swagger-generator": "^1.1.17",
+    "swagger-autogen": "^2.8.1"
   }
 }

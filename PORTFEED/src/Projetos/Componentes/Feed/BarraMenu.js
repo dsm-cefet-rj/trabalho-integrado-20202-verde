@@ -6,24 +6,6 @@ import {
 
 
 export default function BarraMenu(){
-
-  /*  
-  const [position, setPosition] = useState(0);
-    const [tags, setTag] = useState('');
-
-    const onPress = () => {    
-    const pos = position + 1 === tag.length 
-      ? 0 
-      : position + 1;
-    setPosition(pos);
-    }
-
-    useEffect(() => {
-    setTag(tag[position]);
-   }, [position]);
-  
-  */
-
    
     return (
       <div className="borda">

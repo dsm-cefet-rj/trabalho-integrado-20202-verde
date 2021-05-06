@@ -24,6 +24,7 @@ function Feed_Postagem (props) {
   const error = useSelector(state => state.postagem.error);  
   const dispatch = useDispatch()
   
+
   useEffect(() => {
     if (status === 'not_loaded') {
       dispatch(fetchPostagem())
@@ -37,7 +38,9 @@ function Feed_Postagem (props) {
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
     FeedPostagem = <RenderPost postagem={postagem}/>;
   }else if(status === 'loading'){
-    FeedPostagem = <div>Carregando Feed...</div>;
+    FeedPostagem = <div>Carregando Post...</div>;
+  }else if(status === 'not_loaded'){
+    FeedPostagem = '';
   }else if(status === 'failed'){
     FeedPostagem = <div>Error: {error}</div>;
   }
@@ -63,7 +66,6 @@ function Feed_Postagem (props) {
     }
     return(
         <div className="li">
-
         <div className="post">
         <h1>Nome do Usuario</h1>
         <div className="caixa">
