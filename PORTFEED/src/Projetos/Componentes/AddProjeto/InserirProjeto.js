@@ -123,7 +123,7 @@ import store from '../store/GuardaProjeto';
             
             </form>
             <div class= 'fant'>
-            <input type="text" class= 'fant'  name="usuario"   defaultValue={CheckUser()} ref ={register}/>
+            <input type="text" class= 'fant'  name="usuario"  defaultValue={CheckUser()} ref ={register}/>
             </div>
           </div>
           

@@ -49,7 +49,7 @@ function InserirPerfil(props) {
         } else {
             console.log('atualizou')
             dispatch(updateusuarioServer({ ...usuario, id: usuarioFound.id }));
-            <Link to={`/User/${usuario.id}`}> </Link>
+            history.push(`/User/${usuarioFound.id}`);
             dispatch(fetchUsuario())
         }
         document.documentElement.scrollTop = 0;
@@ -59,6 +59,8 @@ function InserirPerfil(props) {
         history.push('/Feed');
         document.documentElement.scrollTop = 0;
     }
+
+    console.log(store.getState().logins.user)
 
     return (<div>
         <h1>{titulo}</h1>
@@ -111,13 +113,12 @@ function InserirPerfil(props) {
     );
 }
 
-function CheckUser() {
-    const [users, setUsers] = React.useState(null);
-    const dispatch = useDispatch();
+function CheckUser()
+    {
+        const dispatch = useDispatch();
+        var nome;
 
-    var nome;
-
-    return (store.getState().logins.user)
+     return ( store.getState().logins.user )
 }
 
 export default (InserirPerfil)

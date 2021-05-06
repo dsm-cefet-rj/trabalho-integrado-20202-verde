@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Link , useParams} from "react-router-dom"
 import {useSelector, connect, useDispatch } from 'react-redux';
 import { selectAllusuario,fetchUsuario,selectusuarioById, deleteusuarioServer} from '../AddPerfil/SlicePerfil.js'
+import store from '../store/GuardaProjeto';
 
 function Usuario(props){
 
@@ -77,23 +78,7 @@ function CheckUser(props) {
 
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (!users){
-    fetch("http://localhost:3004/users").then(x =>
-      x.json().then(y => {
-        setUsers(y);
-        setLoading(false);
-      })
-    );
-  }
-  
-  }, [users,dispatch]);
-
-  if (loading) {
-    return (<div> Carregando... </div>)
-  }
-  
-  if (users.name == props.usuario.usuario){
+  if (store.getState().logins.user == props.usuario.usuario){
     return (
       <div>
        <Link to ={`/Altera/${props.usuario.id}`}>

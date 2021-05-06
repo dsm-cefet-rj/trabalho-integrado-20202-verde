@@ -5,7 +5,7 @@
     "title": "PortFeed",
     "description": "API PORTFEED, rede social de portfólios."
   },
-  "host": "localhost:3000",
+  "host": "localhost:3001",
   "basePath": "/",
   "tags": [
     {
@@ -90,22 +90,67 @@
     },
     "/projetos/": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Projeto"
+        ],
+        "description": "Endpoint para obter um projeto.",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Projetos de usuários.",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "filtro",
+            "description": "Um filtro qualquer.",
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Projeto"
+            },
+            "description": "Projeto encontrado."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/Projeto"
+            },
+            "description": "Projeto não encontrado."
+          }
+        }
       },
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Projeto"
+        ],
+        "description": "Endpoint para adicionar um projeto.",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "newProject",
+            "in": "body",
+            "description": "Informações do projeto.",
+            "required": true,
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/AddProjeto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Projeto registrado com sucesso!"
+          }
+        }
       },
       "options": {
         "tags": [],
@@ -291,7 +336,9 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "erro": {}
+        }
       },
       "delete": {
         "tags": [],

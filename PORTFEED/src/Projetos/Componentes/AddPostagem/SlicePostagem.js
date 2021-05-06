@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
 //import {Urlbase} from 'C:/Users/Eduardo//Documents/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Urlbase.js'
 import {httpGet, httpPut, httpPost, httpDelete} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Utils'
+import store from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/PORTFEED/src/Projetos/Componentes/store/GuardaUser'
 
 const Urlbase = 'http://localhost:3004';
 
@@ -16,12 +17,12 @@ export const fetchPostagem = createAsyncThunk('Postagem/fetchPostagem', async ()
 });
 
 export const deletePostagemServer = createAsyncThunk('Postagem/deletePostagemServer', async (idPostagem, {getState}) => {
-    await httpDelete(`/postagem/${idPostagem}`);
+    await httpDelete(`/postagem/${idPostagem}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idPostagem;
 });
 
 export const updatePostagemServer = createAsyncThunk('Postagem/updatePostagemServer', async (postagem, {getState}) => {
-    return await httpPut(`/postagem/${postagem.id}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    return await httpPut(`/postagem/${postagem.id}`, postagem,{headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const addPostagemServer = createAsyncThunk('Postagem/addPostagemServer', async (postagem, {getState}) => {
