@@ -103,6 +103,9 @@ router.route('/:id')
             #swagger.responses[401] = { 
                 description: ' Acesso não autorizado, necessário fazer login' 
             },
+            #swagger.responses[404] = { 
+                description: 'Projeto não encontrado' 
+            },
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
@@ -136,6 +139,9 @@ router.route('/:id')
             #swagger.responses[401] = {
                 description: ' Acesso não autorizado, necessário fazer login'
                 },
+            #swagger.responses[404] = { 
+                description: 'Projeto não encontrado' 
+            },
             #swagger.responses[500] = {
                 description: 'Server ou banco fora do ar.'
                 }
@@ -163,6 +169,9 @@ router.route('/:id')
             } 
             #swagger.responses[401] = { 
                 description: ' Acesso não autorizado, necessário fazer login' 
+            },
+            #swagger.responses[404] = { 
+                description: 'Projeto não encontrado' 
             },
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
