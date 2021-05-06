@@ -31,7 +31,6 @@ const app = express();
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
-require('./endpoints')(app)
 connect.then((db) => {
   console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
