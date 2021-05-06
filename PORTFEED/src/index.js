@@ -11,12 +11,6 @@ import EditarPostagem from './EditarPostagem.js';
 import FeedPost from './FeedPostagem.js';
 import FeedFav from './FeedFavorito.js'
 import User from './User.js'
-const swaggerUi = require('swagger-ui-express')
-const swaggerFile = require('./swagger_output.json')
-
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
-
-require('./endpoints')(app)
 
 import {
   BrowserRouter as Router,
