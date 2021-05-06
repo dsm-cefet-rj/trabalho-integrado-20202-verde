@@ -22,17 +22,17 @@ const { start } = require('repl');
 
 const url =  config.mongoUrl;
 const connect = mongoose.connect(url);
-const app       = express();
-const swaggerUi = require('express-swaggerize-ui');
+const app = require('express')()
+const http = require('http')
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 
-app.use('./swagger_output.json', function (req, res) {
-  res.json(require('./swagger_output.json'));
-});
-app.use('/api-docs', swaggerUi());
+http.createServer(app).listen(3000)
+console.log("Listening at:// port:%s (HTTP)", 3000)
 
-app.listen(3000);
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
-
+require('./endpoints')(app)
 connect.then((db) => {
   console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
