@@ -1,4 +1,4 @@
-/*var express = require('express');
+var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Postagem = require('../models/postagem');
@@ -84,4 +84,3 @@ router.route('/:id')
     .catch((err) => next(err));
 
 })
-*/

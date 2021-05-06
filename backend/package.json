@@ -12,6 +12,7 @@
     "debug": "~2.6.9",
     "express": "^4.16.4",
     "express-session": "^1.17.1",
+    "express-swaggerize-ui": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
     "morgan": "~1.9.1",
