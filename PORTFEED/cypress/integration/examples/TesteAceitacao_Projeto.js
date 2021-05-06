@@ -32,5 +32,22 @@ describe('Teste Cria Projeto', () => {
 
       cy.contains('Salvar').click()
 	
+      cy.pause()
+
+      cy.contains('Teste Nome').click()
+
+    cy.contains('Editar').click()
+
+	cy.get('.nome_projeto')
+      .type(' trocou nome')
+
+	cy.get('.desc_projeto')
+      .type(' trocou descrição')
+
+	cy.get('.info_projeto')
+      .type(' trocou info')
+
+      cy.contains('Salvar').click()
+
     })
   })

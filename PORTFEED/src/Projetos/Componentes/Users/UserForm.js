@@ -4,9 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useForm } from "react-hook-form";
 import {userServer} from './UserSlice';
 import {loginServer, signupServer} from './UserSlice';
-
+import store from '../store/GuardaProjeto';
 function UserForm(props){
-
 
     const history = useHistory();
     const dispatch = useDispatch()
@@ -29,14 +28,14 @@ function UserForm(props){
             dispatch(signupServer(user))
             setTimeout(() => {
                 dispatch(loginServer(user));
-                setTimeout(() => { history.push('/Cria');},100);
-            }, 500);
+                setTimeout(() => { history.push('/Cria');},1000);
+            }, 900);
         }else
         {
             dispatch(loginServer(user));
             setTimeout(() => {
                 history.push('/');
-            }, 500);
+            }, 900);
         }
         document.documentElement.scrollTop = 0; 
     }

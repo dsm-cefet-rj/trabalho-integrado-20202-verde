@@ -72,7 +72,7 @@ function InserirPostagem(props){
             <div>
             <label>
             <div className = "container">
-            <input type="text" className= 'txtbox' id="post" name="post"  defaultValue={postagemOnLoad.post} ref ={register}/>
+            <input type="text" className= 'txtbox postagem' id="post" name="post"  defaultValue={postagemOnLoad.post} ref ={register}/>
             </div>
             </label>
             

@@ -25,9 +25,9 @@ const connect = mongoose.connect(url);
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
 
-express.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+//express.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
-require('./endpoints')(express)
+//require('./endpoints')(express)
 
 connect.then((db) => {
   console.log("Connected correctly to server");
