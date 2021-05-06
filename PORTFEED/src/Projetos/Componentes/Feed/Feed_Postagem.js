@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom"
 import {useSelector, connect, useDispatch} from 'react-redux';
 import {fetchPostagem, selectAllPostagem, deletePostagemServer} from '../AddPostagem/SlicePostagem.js'
 import './Feed.css';
+import store from '../store/GuardaProjeto';
 
 /*
 import PropTypes from 'prop-types';
@@ -35,8 +36,10 @@ function Feed_Postagem (props) {
   
 
   let FeedPostagem;
+  let checkUser = '';
   if(status === 'loaded' || status === 'saved' || status === 'deleted'){
     FeedPostagem = <RenderPost postagem={postagem}/>;
+    checkUser = <CheckUser/>;
   }else if(status === 'loading'){
     FeedPostagem = <div>Carregando Post...</div>;
   }else if(status === 'not_loaded'){
@@ -49,10 +52,7 @@ function Feed_Postagem (props) {
           return(
             <div className = "container" id="postagem">
                <div className = "container" id="postagem">
-              <Link to = "/NovoPost">
-              <input type="submit" value="CRIAR POST" name = 'salva' onClick = {() =>document.documentElement.scrollTop = 0}/>
-              </Link> 
-
+               {checkUser}
                {FeedPostagem}
                </div>
             </div>
@@ -61,9 +61,8 @@ function Feed_Postagem (props) {
   
   function Post (props){  
     const dispatch = useDispatch()
-    function handleClickExcluirPostagem(ident) {
-      dispatch(deletePostagemServer(ident));
-    }
+    let check2;
+    check2 = <CheckUser2 props = {props.post}/>
     return(
         <div className="li">
         <div className="post">
@@ -72,18 +71,7 @@ function Feed_Postagem (props) {
         <p> {props.post.post} </p>
         </div>
         <div className="barra">
-        <div className="col-xs-6">
-          <Link to={`/EditaPost/${props.post.id}`}>
-          <button className="button" onClick={() => document.documentElement.scrollTop = 0}>
-           Editar 
-          </button>
-          </Link>
-        </div>
-        <div className="col-xs-6"> 
-          <button className="button" onClick={() => handleClickExcluirPostagem(props.post.id)}>
-           Delete
-          </button> 
-        </div>
+        {check2}
         </div>
         </div>
         </div>
@@ -100,39 +88,52 @@ function RenderPost(props){
     )
 
 }
-/*
+
 function CheckUser() {
-  const [loading, setLoading] = React.useState(true);
-  const [users, setUsers] = React.useState(null);
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (!users){
-    fetch("http://localhost:3004/users").then(x =>
-      x.json().then(y => {
-        setUsers(y.name);
-        setLoading(false);
-      })
-    );
-  }
-  
-  }, [users,dispatch]);
-
-  if (loading) {
-    return (<div> Carregando... </div>)
-  }
-  
-  if (users){
+  if (store.getState().logins.user){
     return (
-      <Link to = "/Novo">
-      <input type="submit" value="CRIAR NOVO" name = 'salva' onClick = {() =>document.documentElement.scrollTop = 0}/>
-      </Link> 
+      <Link to = "/NovoPost">
+              <input type="submit" value="CRIAR POST" name = 'salva' onClick = {() =>document.documentElement.scrollTop = 0}/>
+        </Link> 
     )
   }
   else{
     return (<div>  </div>)
   }
 }
-*/
+
+function CheckUser2(props) {
+  const [loading, setLoading] = React.useState(true);
+  const [users, setUsers] = React.useState(null);
+  const dispatch = useDispatch();
+
+  function handleClickExcluirPostagem(ident) {
+    dispatch(deletePostagemServer(ident));
+  }
+  console.log({props})
+  console.log(store.getState().logins.user + ' =!' + props.props.usuario )
+  if (store.getState().logins.user == props.props.usuario){
+    return (
+      <div>
+      <div className="col-xs-6">
+          <Link to={`/EditaPost/${props.props.id}`}>
+          <button className="button" onClick={() => document.documentElement.scrollTop = 0}>
+           Editar 
+          </button>
+          </Link>
+        </div>
+        <div className="col-xs-6"> 
+          <button className="button" onClick={() => handleClickExcluirPostagem(props.props.id)}>
+           Delete
+          </button> 
+        </div>
+        </div>
+    )
+  }
+  else{
+    return (<div>  </div>)
+  }
+}
+
 
 export default connect(state => ({ postagem : state }))(Feed_Postagem);

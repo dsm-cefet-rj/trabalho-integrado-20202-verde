@@ -5,7 +5,8 @@ import { updatePostagemServer,fetchPostagem,addPostagemServer, selectAllPostagem
 import {esquemaPostagem} from 'C:/Users/pedro/OneDrive/Documentos/GitHub/trabalho-integrado-20202-verde/portfeed/src/Projetos/esquemaPostagem.js';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-    
+import store from '../store/GuardaProjeto';
+
 function InserirPostagem(props){
 
     const history = useHistory();
@@ -33,13 +34,15 @@ function InserirPostagem(props){
         if(actionType === 'postagem/addPostagem'){
             console.log('adicionou')
             dispatch(addPostagemServer(postagem));
+            history.push('/FeedPost');
         }else{
             console.log('atualizou')
             dispatch(updatePostagemServer({...postagem, id: postagemFound.id }));
             dispatch(fetchPostagem())
+            history.push('/FeedPost');
         }
         document.documentElement.scrollTop = 0; 
-        history.push('/FeedPost');
+        
     }
 
     function cancela()
@@ -89,8 +92,20 @@ function InserirPostagem(props){
             </div>
 
         </form>
+        <div class= 'fant'>
+            <input type="text" class= 'fant'  name="usuario"  defaultValue={CheckUser()} ref ={register}/>
+            </div>
         </div>
     );
+}
+
+function CheckUser()
+    {
+        const [users, setUsers] = React.useState(null);
+        const dispatch = useDispatch();
+        var nome;
+
+     return ( store.getState().logins.user )
 }
 
 export default (InserirPostagem)

@@ -4,7 +4,7 @@ import Head from './Projetos/Componentes/Head.js';
 import BarraMenu from './Projetos/Componentes/Feed/BarraMenu.js'
 import FeedPostagem from './Projetos/Componentes/Feed/Feed_Postagem.js'
 import {Provider} from "react-redux";
-import store from './Projetos/Componentes/store/GuardaPostagem.js'
+import store from './Projetos/Componentes/store/GuardaProjeto.js'
 
 
 
