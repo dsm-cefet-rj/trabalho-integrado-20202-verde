@@ -13,16 +13,23 @@ router.route('/')
 .options((req, res) => { res.sendStatus(200);})
 .get( async (req, res, next) => {
 
-  /*
+        /*
             #swagger.tags = ['Postagem']
             #swagger.description = 'Endpoint para encontrar as postagens.'
-            #swagger.parameters['postagem'] = {
-                in: 'body',
-                type: "object",
-                description: "Array de objetos contendo todas as postagens do site",
-                schema: {$ref: "#/definitions/Postagem"}
-            } 
         
+        */
+
+  try{
+    const postbd = await Postagem.find({});
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(postbd);
+  }catch(err){
+    err = {};
+    res.statusCode = 404;
+    res.json(err);
+  }
+    /* 
             #swagger.responses[200] = { 
                 schema: { $ref: "#/definitions/Postagem" },
                 description: 'Post encontrado.' 
@@ -36,33 +43,29 @@ router.route('/')
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
-        */
-
-  try{
-    const postbd = await Postagem.find({});
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(postbd);
-  }catch(err){
-    err = {};
-    res.statusCode = 404;
-    res.json(err);
-  }
+        
+    */ 
   
 })
 
 .post(authenticate.verifyUser,(req, res, next) => {
 
-  /*
+        /*
             #swagger.tags = ['Postagem']
             #swagger.description = 'Endpoint para criar uma nova postagem.'
-            #swagger.parameters['postagem'] = {
-                in: 'body',
-                type: "object",
-                description: "Objeto contendo as informações da postagem a ser registrada",
-                schema: {$ref: "#/definitions/Postagem"}
-            } 
-        
+             
+        */
+
+  Postagem.create(req.body)
+  .then((postbd) => {
+      console.log('Projeto criado ', postbd);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(postbd);
+      
+  }, (err) => next(err))
+  .catch((err) => next(err));
+        /* 
             #swagger.responses[200] = { 
                 description: 'Postagem criada.' 
             } 
@@ -73,46 +76,16 @@ router.route('/')
                 description: 'Server ou banco fora do ar.' 
             } 
         */
-
-  Postagem.create(req.body)
-  .then((postbd) => {
-      console.log('Projeto criado ', postbd);
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.json(postbd);
-  }, (err) => next(err))
-  .catch((err) => next(err));
 })
 
 router.route('/:id')
 .put(authenticate.verifyUser,(req, res, next) => {
-
-  /*
-            #swagger.tags = ['Postagem']
+    /*      #swagger.tags = ['Postagem']
             #swagger.description = 'Endpoint para encontrar e atualizar uma postagem através do id.'
             #swagger.parameters['id'] = { description: 'ID da postagem.' }
-            #swagger.parameters['body'] = {
-                in: 'body',
-                type: "object",
-                description: "Objeto contendo as informações da postagem editada",
-                schema: {$ref: "#/definitions/Postagem"}
-                }
-            #swagger.responses[200] = {
-                schema: { $ref: "#/definitions/Postagem" },
-                description: 'Postagem foi editada.'
-                }
-                 #swagger.responses[404] = { 
-                description: 'Post não encontrado.' 
-            },
-            #swagger.responses[401] = {
-                description: ' Acesso não autorizado, necessário fazer login'
-                },
-            #swagger.responses[500] = {
-                description: 'Server ou banco fora do ar.'
-                }
-        */
+    */
   
-  Postagem.findByIdAndUpdate(req.params.id, {
+            Postagem.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, { new: true })
   .then((post) => {
@@ -122,20 +95,37 @@ router.route('/:id')
   }, (err) => next(err))
   .catch((err) => next(err));
 
+    /*
+            #swagger.responses[200] = {
+                schema: { $ref: "#/definitions/Postagem" },
+                description: 'Postagem foi editada.'
+                }
+            #swagger.responses[404] = { 
+                description: 'Post não encontrado.' 
+            },
+            #swagger.responses[401] = {
+                description: ' Acesso não autorizado, necessário fazer login'
+                },
+            #swagger.responses[500] = {
+                description: 'Server ou banco fora do ar.'
+                }
+    */
 })
 .get(authenticate.verifyUser,(req, res, next) => {
-
   /*
-            #swagger.tags = ['Postagem']
-            #swagger.description = 'Endpoint que encontra uma postagem através de seu id.'
-            #swagger.parameters['id'] = { description: 'ID da postagem.' }
-            #swagger.parameters['res'] = {
-                in: 'body',
-                type: "object",
-                description: "Objeto contendo as informações da postagem em questão",
-                schema: {$ref: "#/definitions/Postagem"}
-            } 
-            
+        #swagger.tags = ['Postagem']
+        #swagger.description = 'Endpoint que encontra uma postagem através de seu id.'
+        #swagger.parameters['id'] = { description: 'ID da postagem.' }
+  */
+  Postagem.findById(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+    
+    /*
             #swagger.responses[200] = { 
                 schema: { $ref: "#/definitions/Postagem" },
                 description: 'Postagem existe e é encontrada.' 
@@ -149,24 +139,23 @@ router.route('/:id')
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
-        */
-  
-  Postagem.findById(req.params.id)
-    .then((resp) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(resp);
-    }, (err) => next(err))
-    .catch((err) => next(err));
-
+    */
 })
 
 .delete(authenticate.verifyUser,(req, res, next) => {
-
   /*
-            #swagger.tags = ['Postagem']
+  #swagger.tags = ['Postagem']
             #swagger.description = 'Endpoint para encontrar e excluir uma postagem através do id.'
             #swagger.parameters['id'] = { description: 'ID da postagem' }
+  */
+  Postagem.findByIdAndRemove(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(req.params.id);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+    /*
             #swagger.responses[200] = { 
                 description: 'Postagem apagada' 
             } 
@@ -179,16 +168,7 @@ router.route('/:id')
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
-        */
-  
-  Postagem.findByIdAndRemove(req.params.id)
-    .then((resp) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(req.params.id);
-    }, (err) => next(err))
-    .catch((err) => next(err));
-
+    */
 })
 
 module.exports = router;

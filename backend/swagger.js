@@ -13,7 +13,7 @@ const doc = {
     },
     host: "localhost:3000",
     basePath: "/",
-    schemes: ['http'],
+    schemes: ['http', 'https'],
     consumes: ['application/json'],
     produces: ['application/json'],
     tags: [
@@ -30,29 +30,70 @@ const doc = {
             "description":"Rota para entidade usuario. Cuida do perfil"
         }
     ],
+    securityDefinitions: {
+        bearerAuth: {
+          type: 'apiKey',
+          name: 'Authorization',
+          scheme: 'bearer',
+          in: 'header',
+        },
+    },
+    security: [
+        {
+            bearerAuth: []
+        }
+    ],
     definitions: {
-        Projeto: [
-            {
+        Projeto: 
+            {   
+                "_id" :  "60942851c1af0e0c8c02ce0f",
                 "nome": "Projeto1",
                 "desc": "Primeiro Projeto",
                 "info": "Olá mundo",
-                "id" :  "60942851c1af0e0c8c02ce0f",
-                "usuario" : "Duds12345"
-            }
-        ],
+                "usuario" : "Duds12345",
+                "_v" : 0,
+                "id" :  "60942851c1af0e0c8c02ce0f"
+            },
+        
         Postagem: {
+            "_id": "60944a780b4bf75c240f5865",
             "post": "Manda post",
-            "id": "60944a780b4bf75c240f5865",
+            "_v" : 0,
         },
+
         Usuario: {
+            "_id": "60941f25c1af0e0c8c02cdff",
             "nome": "Perfil1",
             "bio": "Gosto de Macarrão",
             "areaAt": "Computação",
-            "id": "60941f25c1af0e0c8c02cdff"
+            "_v" : 0,
+           
+        },
+
+        SignUp: {
+            success: true,
+            status: "Registration Successful!"
+        },
+        SignUpErro: {
+            err: {
+                name: "UserExistsError",
+                message: "A user with the given username is already registered"
+            }
+        },
+        Login: {
+            username: "any",
+            password: "any"
+        },
+        LoginResposta: {
+            token: "<Bearer Token>",
+            username: "any"
+        },
+        Logout: {
+            token: "<Bearer Token>"
         }
     }
 }
 
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
-    require('./bin/www')           // Your project's root file
+    require('./app')           // Your project's root file
 })

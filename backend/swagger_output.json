@@ -22,8 +22,17 @@
     }
   ],
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "scheme": "bearer",
+      "in": "header"
+    }
+  },
   "consumes": [
     "application/json"
   ],
@@ -44,8 +53,10 @@
     },
     "/users/signup": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "Registra usuário",
         "produces": [
           "application/json"
         ],
@@ -66,26 +77,75 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/SignUp"
+            },
+            "description": "Registrado com sucesso."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/SignUpErro"
+            },
+            "description": "O usuário já está cadastrado."
+          }
+        }
       }
     },
     "/users/login": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "Loga usuário",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LoginResposta"
+            },
+            "description": "Logado com sucesso."
+          },
+          "401": {
+            "description": "Erro na autenticação."
+          }
+        }
       }
     },
     "/users/logout": {
       "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": [
+          "Users"
+        ],
+        "description": "Desloga usuário",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/Logout"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deslogado com sucesso."
+          }
+        }
       }
     },
     "/projetos/": {
@@ -97,17 +157,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "projetos",
-            "in": "body",
-            "type": "object",
-            "description": "Array de objetos contendo todos os projetos do site",
-            "schema": {
-              "$ref": "#/definitions/Projetos"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -134,17 +184,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "projetos",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações do projeto a serem registradas",
-            "schema": {
-              "$ref": "#/definitions/Projeto"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Projeto criado."
@@ -180,15 +220,6 @@
             "required": true,
             "type": "string",
             "description": "ID do projeto."
-          },
-          {
-            "name": "res",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações do projeto em questão",
-            "schema": {
-              "$ref": "#/definitions/Projeto"
-            }
           }
         ],
         "responses": {
@@ -200,6 +231,9 @@
           },
           "401": {
             "description": " Acesso não autorizado, necessário fazer login"
+          },
+          "404": {
+            "description": "Projeto não encontrado"
           },
           "500": {
             "description": "Server ou banco fora do ar."
@@ -221,15 +255,6 @@
             "required": true,
             "type": "string",
             "description": "ID do projeto."
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações do projeto editado",
-            "schema": {
-              "$ref": "#/definitions/Projeto"
-            }
           }
         ],
         "responses": {
@@ -241,6 +266,9 @@
           },
           "401": {
             "description": " Acesso não autorizado, necessário fazer login"
+          },
+          "404": {
+            "description": "Projeto não encontrado"
           },
           "500": {
             "description": "Server ou banco fora do ar."
@@ -271,6 +299,9 @@
           "401": {
             "description": " Acesso não autorizado, necessário fazer login"
           },
+          "404": {
+            "description": "Projeto não encontrado"
+          },
           "500": {
             "description": "Server ou banco fora do ar."
           }
@@ -286,17 +317,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "postagem",
-            "in": "body",
-            "type": "object",
-            "description": "Array de objetos contendo todas as postagens do site",
-            "schema": {
-              "$ref": "#/definitions/Postagem"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -323,17 +344,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "postagem",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações da postagem a ser registrada",
-            "schema": {
-              "$ref": "#/definitions/Postagem"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Postagem criada."
@@ -369,15 +380,6 @@
             "required": true,
             "type": "string",
             "description": "ID da postagem."
-          },
-          {
-            "name": "res",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações da postagem em questão",
-            "schema": {
-              "$ref": "#/definitions/Postagem"
-            }
           }
         ],
         "responses": {
@@ -413,15 +415,6 @@
             "required": true,
             "type": "string",
             "description": "ID da postagem."
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações da postagem editada",
-            "schema": {
-              "$ref": "#/definitions/Postagem"
-            }
           }
         ],
         "responses": {
@@ -484,17 +477,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "usuarios",
-            "in": "body",
-            "type": "object",
-            "description": "Array de objetos contendo todos os usuários do site",
-            "schema": {
-              "$ref": "#/definitions/Usuarios"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "schema": {
@@ -521,17 +504,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "usuarios",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações do usuário a serem registradas",
-            "schema": {
-              "$ref": "#/definitions/Usuario"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Usuário criado."
@@ -561,15 +534,6 @@
             "required": true,
             "type": "string",
             "description": "ID do usuário"
-          },
-          {
-            "name": "res",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações do usuário em questão",
-            "schema": {
-              "$ref": "#/definitions/Usuario"
-            }
           }
         ],
         "responses": {
@@ -605,15 +569,6 @@
             "required": true,
             "type": "string",
             "description": "ID do usuário"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "type": "object",
-            "description": "Objeto contendo as informações do usuário editado",
-            "schema": {
-              "$ref": "#/definitions/Usuario"
-            }
           }
         ],
         "responses": {
@@ -652,9 +607,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Usuário apagado"
-          },
           "401": {
             "description": " Acesso não autorizado, necessário fazer login"
           },
@@ -670,49 +622,62 @@
   },
   "definitions": {
     "Projeto": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "nome": {
-            "type": "string",
-            "example": "Projeto1"
-          },
-          "desc": {
-            "type": "string",
-            "example": "Primeiro Projeto"
-          },
-          "info": {
-            "type": "string",
-            "example": "Olá mundo"
-          },
-          "id": {
-            "type": "string",
-            "example": "60942851c1af0e0c8c02ce0f"
-          },
-          "usuario": {
-            "type": "string",
-            "example": "Duds12345"
-          }
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "60942851c1af0e0c8c02ce0f"
+        },
+        "nome": {
+          "type": "string",
+          "example": "Projeto1"
+        },
+        "desc": {
+          "type": "string",
+          "example": "Primeiro Projeto"
+        },
+        "info": {
+          "type": "string",
+          "example": "Olá mundo"
+        },
+        "usuario": {
+          "type": "string",
+          "example": "Duds12345"
+        },
+        "_v": {
+          "type": "number",
+          "example": 0
+        },
+        "id": {
+          "type": "string",
+          "example": "60942851c1af0e0c8c02ce0f"
         }
       }
     },
     "Postagem": {
       "type": "object",
       "properties": {
+        "_id": {
+          "type": "string",
+          "example": "60944a780b4bf75c240f5865"
+        },
         "post": {
           "type": "string",
           "example": "Manda post"
         },
-        "id": {
-          "type": "string",
-          "example": "60944a780b4bf75c240f5865"
+        "_v": {
+          "type": "number",
+          "example": 0
         }
       }
     },
     "Usuario": {
       "type": "object",
       "properties": {
+        "_id": {
+          "type": "string",
+          "example": "60941f25c1af0e0c8c02cdff"
+        },
         "nome": {
           "type": "string",
           "example": "Perfil1"
@@ -725,11 +690,82 @@
           "type": "string",
           "example": "Computação"
         },
-        "id": {
+        "_v": {
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "SignUp": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "status": {
           "type": "string",
-          "example": "60941f25c1af0e0c8c02cdff"
+          "example": "Registration Successful!"
+        }
+      }
+    },
+    "SignUpErro": {
+      "type": "object",
+      "properties": {
+        "err": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "UserExistsError"
+            },
+            "message": {
+              "type": "string",
+              "example": "A user with the given username is already registered"
+            }
+          }
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "any"
+        },
+        "password": {
+          "type": "string",
+          "example": "any"
+        }
+      }
+    },
+    "LoginResposta": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "<Bearer Token>"
+        },
+        "username": {
+          "type": "string",
+          "example": "any"
+        }
+      }
+    },
+    "Logout": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "<Bearer Token>"
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
 }

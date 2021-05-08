@@ -25,10 +25,6 @@ const projetoSchema = new Schema({
         type: String,
         required: true
     },
-    favorito: {
-        type: Boolean,
-        default: false
-    }
     /*,
     idusuario:{
         type: String,
@@ -37,16 +33,7 @@ const projetoSchema = new Schema({
     
 })
 
-/*
-projetoSchema.method('transform', function (){
-var obj = this.toObject();
 
-obj.id = obj._id;
-delete obj._id;
-
-return obj;
-})
-*/
 projetoSchema.plugin(normalize);
 
 var Projetos = mongoose.model('Projeto', projetoSchema);
