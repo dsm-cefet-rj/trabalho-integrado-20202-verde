@@ -66,6 +66,10 @@ function UserForm(props){
             <div class = "col-xs-6">
             <input type="submit" value="Salvar" name = 'salva' />
             </div>
+
+            <div class= 'fant'>
+            <input type="text" class= 'fant'  name="idperfil"  defaultValue={' '} ref ={register}/>
+            </div>
             </form>
             </div>
           </div>

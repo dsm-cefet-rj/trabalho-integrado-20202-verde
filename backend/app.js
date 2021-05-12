@@ -28,6 +28,13 @@ const connect = mongoose.connect(url);
 
 
 const app = express();
+const app = require('express')()
+const http = require('http')
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
+/*
+http.createServer(app).listen(3000)
+console.log("Listening at:// port:%s (HTTP)", 3000)
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
@@ -37,6 +44,7 @@ connect.then((db) => {
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
+*/
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

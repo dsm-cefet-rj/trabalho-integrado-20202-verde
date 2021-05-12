@@ -8,7 +8,8 @@ const usuarioAdapter = createEntityAdapter();
 
 const salvausuario = usuarioAdapter.getInitialState({
     status: 'not_loaded',
-    error: null
+    error: null,
+    usuarioid: null
 });
 
 export const fetchUsuario = createAsyncThunk('usuario/fetchUsuario', async () => {
@@ -37,7 +38,7 @@ export const sliceUsuario = createSlice({
         [updateusuarioServer.pending]: (state, action) => {state.status = 'loading'},
         [updateusuarioServer.fulfilled]: (state, action) => {state.status = 'saved'; usuarioAdapter.updateOne(state, action.payload);},
         [addusuarioServer.pending]: (state, action) => {state.status = 'loading'},
-        [addusuarioServer.fulfilled]: (state, action) => {state.status = 'saved'; usuarioAdapter.addOne(state, action.payload);},
+        [addusuarioServer.fulfilled]: (state, action) => {state.status = 'saved'; usuarioAdapter.addOne(state, action.payload); state.usuarioid = action.payload.id},
         [deleteusuarioServer.pending]: (state, action) => {state.status = 'loading'},
        [deleteusuarioServer.fulfilled]: (state, action) => {state.status = 'deleted'; usuarioAdapter.removeOne(state, action.payload);},
     }

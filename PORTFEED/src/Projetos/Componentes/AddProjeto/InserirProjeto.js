@@ -125,6 +125,10 @@ import store from '../store/GuardaProjeto';
             <div class= 'fant'>
             <input type="text" class= 'fant'  name="usuario"  defaultValue={CheckUser()} ref ={register}/>
             </div>
+
+            <div class= 'fant'>
+            <input type="text" class= 'fant'  name="usuarioid"  defaultValue={CheckUser2()} ref ={register}/>
+            </div>
           </div>
           
 );
@@ -137,6 +141,11 @@ function CheckUser()
         var nome;
 
      return ( store.getState().logins.user )
+}
+
+function CheckUser2()
+    {
+     return ( store.getState().usuario.usuarioid )
 }
 
 export default (InserirProjeto)

@@ -12,20 +12,10 @@ var nome;
 
 router.use(bodyParser.json());
 
-router.route('/')
-.get(async (req, res, next) => {
+router.route('/users').put((req, res, next) => {
+  console.log({req});
+  User.findByIdAndUpdate(req.params.id, { idperfil: req.params.idperfil})
 
-  try{
-    const userbd = await Usuario.find({});
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({name : nome});
-  }catch(err){
-    err = {};
-    res.statusCode = 404;
-    res.json(err);
-  }
-  
 })
 
 router.post('/signup', (req, res, next) => {
@@ -39,7 +29,6 @@ router.post('/signup', (req, res, next) => {
             res.statusCode = 500;
             res.setHeader('Content-Type', 'application/json');
             res.json({err: err});
-          
         } else {
             passport.authenticate('local')(req, res, () => {
                 res.statusCode = 200;
@@ -70,6 +59,7 @@ router.post('/signup', (req, res, next) => {
         }
     */
 
+    console.log(req)
     var token = authenticate.getToken({_id: req.user._id});
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');

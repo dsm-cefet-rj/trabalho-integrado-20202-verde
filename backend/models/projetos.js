@@ -25,11 +25,15 @@ const projetoSchema = new Schema({
         type: String,
         required: true
     },
-    /*,
-    idusuario:{
+    favorito: {
+        type: Boolean,
+        default: false
+    }
+    ,
+    usuarioid:{
         type: String,
         required: true
-    }*/
+    }
     
 })
 

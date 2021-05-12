@@ -24,9 +24,12 @@ function Feed_Postagem (props) {
   const status = useSelector(state => state.postagem.status);
   const error = useSelector(state => state.postagem.error);  
   const dispatch = useDispatch()
+
+  
   
 
   useEffect(() => {
+    fetch("/users")
     if (status === 'not_loaded') {
       dispatch(fetchPostagem())
     } else if (status === 'failed') {
@@ -107,11 +110,10 @@ function CheckUser2(props) {
   const [users, setUsers] = React.useState(null);
   const dispatch = useDispatch();
 
+
   function handleClickExcluirPostagem(ident) {
     dispatch(deletePostagemServer(ident));
   }
-  console.log({props})
-  console.log(store.getState().logins.user + ' =!' + props.props.usuario )
   if (store.getState().logins.user == props.props.usuario){
     return (
       <div>

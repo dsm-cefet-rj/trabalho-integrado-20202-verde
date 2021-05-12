@@ -17,6 +17,10 @@ var User = new Schema({
     admin:{
         type: Boolean,
         default: false
+    },
+    idperfil:{
+        type:String,
+        required: false
     }
 });
 
