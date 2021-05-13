@@ -12,9 +12,14 @@ router.route('/')
 .get(async (req, res, next) => {
 
         /*
-            #swagger.tags = ['Usuário']
+            #swagger.tags = ['Usuario']
             #swagger.description = 'Endpoint para encontrar os usuários.'
-            
+            #swagger.parameters['obj'] = {
+                in: 'body',
+                type: "object",
+                description: "Array de objetos contendo todos os usuarios",
+                schema: {$ref: "#/definitions/Usuario"}
+            } 
         */
 
   try{
@@ -32,15 +37,9 @@ router.route('/')
  
     /* 
     #swagger.responses[200] = { 
-        schema: { $ref: "#/definitions/Usuarios" },
+        schema: { $ref: "#/definitions/Usuario" },
         description: 'Usuários encontrados.' 
     } 
-    #swagger.responses[404] = { 
-        description: 'Usuário não encontrado.' 
-    },
-    #swagger.responses[401] = { 
-        description: 'Acesso não autorizado, necessário fazer login' 
-    },
     #swagger.responses[500] = { 
         description: 'Server ou banco fora do ar.' 
     } 
@@ -53,11 +52,17 @@ router.route('/')
         /*
             #swagger.tags = ['Usuario']
             #swagger.description = 'Endpoint para criar um novo usuário.' 
+            #swagger.parameters['obj'] = {
+                in: 'body',
+                type: "object",
+                description: "",
+                schema: {$ref: "#/definitions/Usuario"}
+            } 
         */
 
     Usuario.create(req.body)
     .then((usuariobd) => {
-        console.log('Projeto criado ', usuariobd);
+        console.log('Usuario criado ', usuariobd);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(usuariobd);
@@ -67,9 +72,6 @@ router.route('/')
             #swagger.responses[200] = { 
                 description: 'Usuário criado.' 
             } 
-            #swagger.responses[401] = { 
-                description: ' Acesso não autorizado, necessário fazer login' 
-            },
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
@@ -102,9 +104,6 @@ router.route('/')
                 schema: { $ref: "#/definitions/Usuario" },
                 description: 'Usuário foi editado.'
                 }
-            #swagger.responses[401] = {
-                description: ' Acesso não autorizado, necessário fazer login'
-                },
             #swagger.responses[404] = { 
                 description: 'Usuário não encontrado' 
             },
@@ -116,7 +115,7 @@ router.route('/')
   .get(authenticate.verifyUser,(req, res, next) => {
 
         /*
-            #swagger.tags = ['usuario']
+            #swagger.tags = ['Usuario']
             #swagger.description = 'Endpoint que encontra um usuário através de seu id.'
             #swagger.parameters['id'] = { description: 'ID do usuário' }
             
@@ -131,12 +130,9 @@ router.route('/')
       
         /*    
             #swagger.responses[200] = { 
-                schema: { $ref: "#/definitions/Projeto" },
+                schema: { $ref: "#/definitions/Usuario" },
                 description: 'Usuário existe e é encontrado.' 
             } 
-            #swagger.responses[401] = { 
-                description: ' Acesso não autorizado, necessário fazer login' 
-            },
             #swagger.responses[404] = { 
                 description: 'Usuário não encontrado' 
             },
@@ -165,9 +161,9 @@ router.route('/')
       .catch((err) => next(err));
         
         /*    
-            #swagger.responses[401] = { 
-                description: ' Acesso não autorizado, necessário fazer login' 
-            },
+            #swagger.responses[200] = { 
+                description: 'Usuário apagado.' 
+            } 
             #swagger.responses[404] = { 
                 description: 'Usuário não encontrado' 
             },

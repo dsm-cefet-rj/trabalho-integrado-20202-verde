@@ -5,7 +5,7 @@
     "title": "PortFeed",
     "description": "API PORTFEED, rede social de portfólios."
   },
-  "host": "localhost:3000",
+  "host": "localhost:3004",
   "basePath": "/",
   "tags": [
     {
@@ -157,19 +157,23 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "Array de objetos contendo todos os projetos",
+            "schema": {
+              "$ref": "#/definitions/Projeto"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Projetos"
+              "$ref": "#/definitions/Projeto"
             },
             "description": "Projeto encontrado."
-          },
-          "401": {
-            "description": "Acesso não autorizado, necessário fazer login"
-          },
-          "404": {
-            "description": "Projeto não encontrado."
           },
           "500": {
             "description": "Server ou banco fora do ar."
@@ -178,19 +182,26 @@
       },
       "post": {
         "tags": [
-          "Projetos"
+          "Projeto"
         ],
         "description": "Endpoint para criar um novo projeto.",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "Array de objetos contendo todos os projetos",
+            "schema": {
+              "$ref": "#/definitions/Projeto"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Projeto criado."
-          },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
           },
           "500": {
             "description": "Server ou banco fora do ar."
@@ -207,7 +218,7 @@
     "/projetos/{id}": {
       "get": {
         "tags": [
-          "Projetos"
+          "Projeto"
         ],
         "description": "Endpoint que encontra um projeto através de seu id.",
         "produces": [
@@ -218,8 +229,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID do projeto."
+            "type": "string"
           }
         ],
         "responses": {
@@ -228,9 +238,6 @@
               "$ref": "#/definitions/Projeto"
             },
             "description": "Projeto existe e é encontrado."
-          },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
           },
           "404": {
             "description": "Projeto não encontrado"
@@ -253,8 +260,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID do projeto."
+            "type": "string"
           }
         ],
         "responses": {
@@ -263,9 +269,6 @@
               "$ref": "#/definitions/Projeto"
             },
             "description": "Projeto foi editado."
-          },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
           },
           "404": {
             "description": "Projeto não encontrado"
@@ -288,16 +291,12 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "ID do projeto"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Projeto apagado"
-          },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
           },
           "404": {
             "description": "Projeto não encontrado"
@@ -317,19 +316,23 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "Array de objetos contendo todos as postagens",
+            "schema": {
+              "$ref": "#/definitions/Postagem"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "schema": {
               "$ref": "#/definitions/Postagem"
             },
             "description": "Post encontrado."
-          },
-          "401": {
-            "description": "Acesso não autorizado, necessário fazer login"
-          },
-          "404": {
-            "description": "Post não encontrado."
           },
           "500": {
             "description": "Server ou banco fora do ar."
@@ -344,13 +347,23 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Postagem"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Postagem criada."
           },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
+          "404": {
+            "description": "Post não encontrado."
           },
           "500": {
             "description": "Server ou banco fora do ar."
@@ -389,9 +402,6 @@
             },
             "description": "Postagem existe e é encontrada."
           },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
-          },
           "404": {
             "description": "Post não encontrado."
           },
@@ -424,9 +434,6 @@
             },
             "description": "Postagem foi editada."
           },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
-          },
           "404": {
             "description": "Post não encontrado."
           },
@@ -456,9 +463,6 @@
           "200": {
             "description": "Postagem apagada"
           },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
-          },
           "404": {
             "description": "Post não encontrado."
           },
@@ -471,25 +475,29 @@
     "/usuario/": {
       "get": {
         "tags": [
-          "Usuário"
+          "Usuario"
         ],
         "description": "Endpoint para encontrar os usuários.",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "Array de objetos contendo todos os usuarios",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Usuarios"
+              "$ref": "#/definitions/Usuario"
             },
             "description": "Usuários encontrados."
-          },
-          "401": {
-            "description": "Acesso não autorizado, necessário fazer login"
-          },
-          "404": {
-            "description": "Usuário não encontrado."
           },
           "500": {
             "description": "Server ou banco fora do ar."
@@ -504,13 +512,20 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "type": "object",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Usuário criado."
-          },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
           },
           "500": {
             "description": "Server ou banco fora do ar."
@@ -521,7 +536,7 @@
     "/usuario/{id}": {
       "get": {
         "tags": [
-          "usuario"
+          "Usuario"
         ],
         "description": "Endpoint que encontra um usuário através de seu id.",
         "produces": [
@@ -539,12 +554,9 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Projeto"
+              "$ref": "#/definitions/Usuario"
             },
             "description": "Usuário existe e é encontrado."
-          },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
           },
           "404": {
             "description": "Usuário não encontrado"
@@ -578,9 +590,6 @@
             },
             "description": "Usuário foi editado."
           },
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
-          },
           "404": {
             "description": "Usuário não encontrado"
           },
@@ -607,8 +616,8 @@
           }
         ],
         "responses": {
-          "401": {
-            "description": " Acesso não autorizado, necessário fazer login"
+          "200": {
+            "description": "Usuário apagado."
           },
           "404": {
             "description": "Usuário não encontrado"

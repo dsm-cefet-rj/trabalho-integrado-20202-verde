@@ -11,7 +11,7 @@ const doc = {
         title: "PortFeed",
         description: "API PORTFEED, rede social de portfólios."
     },
-    host: "localhost:3000",
+    host: "localhost:3004",
     basePath: "/",
     schemes: ['http', 'https'],
     consumes: ['application/json'],
@@ -43,7 +43,7 @@ const doc = {
             bearerAuth: []
         }
     ],
-    definitions: {
+    definitions:{
         Projeto: 
             {   
                 "_id" :  "60942851c1af0e0c8c02ce0f",
