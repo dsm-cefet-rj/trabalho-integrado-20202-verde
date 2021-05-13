@@ -77,7 +77,7 @@ function Feed (props) {
          </Link>
          </div>
         <Link to = {`/Projeto/${props.port.id}`}>
-         <img className="img-responsive" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFmwcSOL0Y2LvXIqo3YQEgK4MmGJYtVokRtw&usqp=CAU"  alt= "P2"  onClick = {() =>document.documentElement.scrollTop = 0}/>  
+         <img className="img-responsive" src= {props.port.img}  alt= "P2"  onClick = {() =>document.documentElement.scrollTop = 0}/>  
          </Link>
           <div className="col-xs-6">
             <button className="button" onClick={() => props.port.favorito === !props.port.favorito}> 

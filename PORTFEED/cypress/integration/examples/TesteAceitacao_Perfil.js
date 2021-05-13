@@ -16,7 +16,7 @@ describe('Teste Cria Projeto', () => {
 
       cy.contains('Salvar').click()
 	
-	cy.contains('Testando Titulo').click()
+	cy.contains('Teste Pedro').click()
 
 	cy.contains('Usuário').click()
 

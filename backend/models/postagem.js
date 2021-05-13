@@ -12,10 +12,10 @@ const postagemSchema = new Schema({
         type: String,
         ref: 'id'
     },
-    /*usuario:{
+    usuario:{
         type: String,
         required: true
-    },*/
+    }
 })
 
 postagemSchema.plugin(normalize);

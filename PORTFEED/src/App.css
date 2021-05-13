@@ -7,6 +7,12 @@
   font-family: Arial;
   font-size: 18px;
 }
+.txtimg{ 
+  width:  calc(100vw - 50px);      /* calc and viewport to the rescue */
+  height: 200px;
+  font-family: Arial;
+  font-size: 18px;
+}
 .txtbox{ 
   width:  calc(100vw - 50px);      /* calc and viewport to the rescue */
   font-family: Arial;

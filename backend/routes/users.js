@@ -14,7 +14,7 @@ router.use(bodyParser.json());
 
 router.route('/users').put((req, res, next) => {
   console.log({req});
-  User.findByIdAndUpdate(req.params.id, { idperfil: req.params.idperfil})
+ // User.findByIdAndUpdate(req.params.id, { idperfil: req.params.idperfil})
 
 })
 

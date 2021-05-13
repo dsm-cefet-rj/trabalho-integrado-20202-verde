@@ -96,9 +96,14 @@ import store from '../store/GuardaProjeto';
             </div>
             <br/>
 
-            <div >
-              <img  class="divimagem img-responsive"   src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Plus_font_awesome.svg/512px-Plus_font_awesome.svg.png" alt="Imagem"></img>
+            <div class = "col-xs-12">
+            <label for="username">Escolha uma imagem para o projeto: 
+                    <span> {errors.img?.message}</span>
+                    <br/>
+            <textarea name ='img' class= 'txtimg img_projeto' defaultValue={projetoOnLoad.img} ref ={register}/>
+            </label> 
             </div>
+
             <br/>
             <div class = "col-xs-12">
             <label for="username"> Informações Extras:

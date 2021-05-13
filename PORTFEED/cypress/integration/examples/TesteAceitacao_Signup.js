@@ -7,7 +7,7 @@ describe('Teste SignUp/Criar Perfil', () => {
       cy.url().should('include', '/Registrar')
 
       cy.get('.username')
-      .type('Teste_auto')
+      .type('Testeando Teste')
       .should('have.value', 'Teste_auto')
 
       cy.get('.password')

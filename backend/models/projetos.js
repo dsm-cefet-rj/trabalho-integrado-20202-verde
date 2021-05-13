@@ -29,12 +29,15 @@ const projetoSchema = new Schema({
         type: Boolean,
         default: false
     }
-    ,
+    , 
     usuarioid:{
         type: String,
         required: true
+    }, 
+    img:{
+        type: String,
+        required: true
     }
-    
 })
 
 
