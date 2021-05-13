@@ -16,7 +16,12 @@ router.route('/')
         /*
             #swagger.tags = ['Postagem']
             #swagger.description = 'Endpoint para encontrar as postagens.'
-        
+            #swagger.parameters['obj'] = {
+                in: 'body',
+                type: "object",
+                description: "Array de objetos contendo todos as postagens",
+                schema: {$ref: "#/definitions/Postagem"}
+            } 
         */
 
   try{
@@ -34,12 +39,6 @@ router.route('/')
                 schema: { $ref: "#/definitions/Postagem" },
                 description: 'Post encontrado.' 
             } 
-            #swagger.responses[404] = { 
-                description: 'Post não encontrado.' 
-            },
-            #swagger.responses[401] = { 
-                description: 'Acesso não autorizado, necessário fazer login' 
-            },
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
@@ -53,12 +52,17 @@ router.route('/')
         /*
             #swagger.tags = ['Postagem']
             #swagger.description = 'Endpoint para criar uma nova postagem.'
-             
+            #swagger.parameters['obj'] = {
+                in: 'body',
+                type: "object",
+                description: "",
+                schema: {$ref: "#/definitions/Postagem"}
+            } 
         */
 
   Postagem.create(req.body)
   .then((postbd) => {
-      console.log('Projeto criado ', postbd);
+      console.log('Postagem criada ', postbd);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(postbd);
@@ -69,8 +73,8 @@ router.route('/')
             #swagger.responses[200] = { 
                 description: 'Postagem criada.' 
             } 
-            #swagger.responses[401] = { 
-                description: ' Acesso não autorizado, necessário fazer login' 
+            #swagger.responses[404] = { 
+                description: 'Post não encontrado.' 
             },
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
@@ -103,9 +107,6 @@ router.route('/:id')
             #swagger.responses[404] = { 
                 description: 'Post não encontrado.' 
             },
-            #swagger.responses[401] = {
-                description: ' Acesso não autorizado, necessário fazer login'
-                },
             #swagger.responses[500] = {
                 description: 'Server ou banco fora do ar.'
                 }
@@ -133,9 +134,6 @@ router.route('/:id')
              #swagger.responses[404] = { 
                 description: 'Post não encontrado.' 
             },
-            #swagger.responses[401] = { 
-                description: ' Acesso não autorizado, necessário fazer login' 
-            },
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
@@ -144,7 +142,7 @@ router.route('/:id')
 
 .delete(authenticate.verifyUser,(req, res, next) => {
   /*
-  #swagger.tags = ['Postagem']
+            #swagger.tags = ['Postagem']
             #swagger.description = 'Endpoint para encontrar e excluir uma postagem através do id.'
             #swagger.parameters['id'] = { description: 'ID da postagem' }
   */
@@ -159,9 +157,6 @@ router.route('/:id')
             #swagger.responses[200] = { 
                 description: 'Postagem apagada' 
             } 
-            #swagger.responses[401] = { 
-                description: ' Acesso não autorizado, necessário fazer login' 
-            },
              #swagger.responses[404] = { 
                 description: 'Post não encontrado.' 
             },

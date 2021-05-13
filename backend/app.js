@@ -42,7 +42,6 @@ connect.then((db) => {
   console.log("Connected correctly to server");
 }, (err) => { console.log(err); });
 
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 */
 app.use(logger('dev'));

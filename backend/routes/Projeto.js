@@ -15,6 +15,13 @@ router.route('/')
     /*
             #swagger.tags = ['Projeto']
             #swagger.description = 'Endpoint para encontrar os projetos.' 
+            #swagger.parameters['obj'] = {
+                in: 'body',
+                type: "object",
+                description: "Array de objetos contendo todos os projetos",
+                schema: {$ref: "#/definitions/Projeto"}
+            } 
+            
     */
           
   try{
@@ -28,15 +35,9 @@ router.route('/')
     res.json(err);
   }
     /*  #swagger.responses[200] = { 
-                schema: { $ref: "#/definitions/Projetos" },
+                schema: { $ref: "#/definitions/Projeto" },
                 description: 'Projeto encontrado.' 
             } 
-            #swagger.responses[404] = { 
-                description: 'Projeto não encontrado.' 
-            },
-            #swagger.responses[401] = { 
-                description: 'Acesso não autorizado, necessário fazer login' 
-            },
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
@@ -47,8 +48,14 @@ router.route('/')
 .post(authenticate.verifyUser,(req, res, next) => {
 
     /*
-            #swagger.tags = ['Projetos']
+            #swagger.tags = ['Projeto']
             #swagger.description = 'Endpoint para criar um novo projeto.'
+            #swagger.parameters['obj'] = {
+                in: 'body',
+                type: "object",
+                description: "Array de objetos contendo todos os projetos",
+                schema: {$ref: "#/definitions/Projeto"}
+            } 
     */
   Projetos.create(req.body)
   .then((projetobd) => {
@@ -62,9 +69,6 @@ router.route('/')
             #swagger.responses[200] = { 
                 description: 'Projeto criado.' 
             } 
-            #swagger.responses[401] = { 
-                description: ' Acesso não autorizado, necessário fazer login' 
-            },
             #swagger.responses[500] = { 
                 description: 'Server ou banco fora do ar.' 
             } 
@@ -77,9 +81,9 @@ router.route('/:id')
 .get((req, res, next) => {
 
     /*
-            #swagger.tags = ['Projetos']
+            #swagger.tags = ['Projeto']
             #swagger.description = 'Endpoint que encontra um projeto através de seu id.'
-            #swagger.parameters['id'] = { description: 'ID do projeto.' }
+           
     */           
             
 
@@ -96,9 +100,6 @@ router.route('/:id')
         schema: { $ref: "#/definitions/Projeto" },
         description: 'Projeto existe e é encontrado.' 
     } 
-    #swagger.responses[401] = { 
-        description: ' Acesso não autorizado, necessário fazer login' 
-    },
     #swagger.responses[404] = { 
         description: 'Projeto não encontrado' 
     },
@@ -112,7 +113,8 @@ router.route('/:id')
   /*
             #swagger.tags = ['Projeto']
             #swagger.description = 'Endpoint para encontrar e atualizar um projeto através do id.'
-            #swagger.parameters['id'] = { description: 'ID do projeto.' }
+           
+           
     */
   
   Projetos.findByIdAndUpdate(req.params.id, {
@@ -130,9 +132,6 @@ router.route('/:id')
                 schema: { $ref: "#/definitions/Projeto" },
                 description: 'Projeto foi editado.'
                 }
-            #swagger.responses[401] = {
-                description: ' Acesso não autorizado, necessário fazer login'
-                },
             #swagger.responses[404] = { 
                 description: 'Projeto não encontrado' 
             },
@@ -146,7 +145,7 @@ router.route('/:id')
   /*
             #swagger.tags = ['Projeto']
             #swagger.description = 'Endpoint para encontrar e excluir um projeto através do id.'
-            #swagger.parameters['id'] = { description: 'ID do projeto' }
+           
     */
 
   Projetos.findByIdAndRemove(req.params.id)
@@ -157,12 +156,9 @@ router.route('/:id')
     }, (err) => next(err))
     .catch((err) => next(err));
     
-    /*#swagger.responses[200] = { 
+    /*      #swagger.responses[200] = { 
                 description: 'Projeto apagado' 
             } 
-            #swagger.responses[401] = { 
-                description: ' Acesso não autorizado, necessário fazer login' 
-            },
             #swagger.responses[404] = { 
                 description: 'Projeto não encontrado' 
             },
